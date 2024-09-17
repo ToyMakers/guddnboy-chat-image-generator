@@ -10,6 +10,7 @@ const config: Config = {
         extend: {
             colors: {
                 chatbg: "#9bbbd4",
+                yourchatbg: "#ffffff",
                 mychatbg: "#fef01b",
                 timebg: "#556677",
                 background: "var(--background)",
