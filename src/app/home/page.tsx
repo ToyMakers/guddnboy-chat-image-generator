@@ -1,25 +1,24 @@
 import React from "react";
-import ChatSubmitButton from "@/components/ChatSubmitButton";
+import Chatting from "@/components/Chatting";
+import ContentPreview from "@/components/ContentPreview";
 
 function home() {
     return (
-        <div className="flex flex-col items-center align-middle text-center">
-            <div className="bg-chatbg w-72 h-96 rounded-md">
+        <div className="flex justify-around text-center">
+            <div className="flex flex-col bg-chatbg w-80 h-96 rounded-md">
                 <div className="h-12">채팅방 미리보기 페이지</div>
-                <div className="h-72 bg-mychatbg">채팅 보일 공간</div>
-                <div className="h-12 flex justify-between items-center align-middle">
-                    <form className="w-60">
-                        <input
-                            type="text"
-                            placeholder="채팅을 입력하세요."
-                            className=""
-                        />
-                    </form>
-                    <ChatSubmitButton />
+                <ContentPreview />
+                <Chatting />
+            </div>
+            <div className="flex flex-col">
+                <div className="w-96 h-64 bg-yourchatbg rounded-md">
+                    프로필 생성 페이지
+                </div>
+                <div className="w-96 h-32 my-4 bg-yourchatbg rounded-md">
+                    본인 프로필 선택
                 </div>
             </div>
         </div>
     );
 }
-
 export default home;
