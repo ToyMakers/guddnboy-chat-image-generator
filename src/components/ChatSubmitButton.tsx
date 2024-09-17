@@ -1,13 +1,22 @@
 "use client";
+import { useMessageStore } from "@/store/useMessageStore";
 import React from "react";
 
 const ChatSubmitButton = () => {
-    const btnClick = () => {
-        console.log("버튼 클릭");
+    const message = useMessageStore((state) => state.message);
+    const setMessage = useMessageStore((state) => state.setMessage);
+
+    const handleMessageSubmit = (text: string) => {
+        setMessage(text);
     };
 
     return (
-        <button onClick={btnClick} className="w-12">
+        <button
+            onClick={() => {
+                handleMessageSubmit(message);
+                console.log("message: ", message);
+            }}
+            className="size-12 rounded-md hover:bg-slate-500">
             전송
         </button>
     );
