@@ -7,8 +7,10 @@
     --foreground: ##555555;
 }
 
-div {
-    max-width: 1000px;
+@layer base {
+    div {
+        @apply max-w-[1000px];
+    }
 }
 
 @media (prefers-color-scheme: dark) {
