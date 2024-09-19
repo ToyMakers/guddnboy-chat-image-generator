@@ -1,28 +1,26 @@
 import { create, StateCreator } from "zustand";
+import { MessageSlice } from "./messageSlice";
+import { MessageListSlice } from "./messageListSlice";
 
-interface MessageSlice {
-    message: string;
-    setMessage: (message: string) => void;
-}
-
-interface UserNameSlice {
-    username: string;
-    setUsername: (profile: string) => void;
-}
-
-const createMessageSlice: StateCreator<MessageSlice> = (set) => ({
-    message: "",
-    setMessage: (message) => set({ message }),
-});
-
-const createUserNameSlice: StateCreator<UserNameSlice> = (set) => ({
+const createMessageSlice: StateCreator<MessageSlice & MessageListSlice> = (
+    set
+) => ({
     username: "",
+    message: "",
+    time: "",
+
+    users: [],
+    setUsers: (users) => set({ users }),
+    addUserInformation: () => {},
+    removeUserInformation: () => {},
+
     setUsername: (username) => set({ username }),
+    setMessage: (message) => set({ message }),
+    setTime: (time) => set({ time }),
 });
 
-export const useMessageStore = create<MessageSlice & UserNameSlice>()(
+export const useMessageStore = create<MessageSlice & MessageListSlice>()(
     (...a) => ({
         ...createMessageSlice(...a),
-        ...createUserNameSlice(...a),
     })
 );
