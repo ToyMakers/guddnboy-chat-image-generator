@@ -1,6 +1,8 @@
 import React from "react";
 import Chatting from "@/components/Chatting";
 import ContentPreview from "@/components/ContentPreview";
+import AddUser from "@/components/Adding/AddUser";
+import SelectMyProfile from "@/components/SelectMyProfile";
 
 function home() {
     return (
@@ -11,12 +13,8 @@ function home() {
                 <Chatting />
             </div>
             <div className="flex flex-col">
-                <div className="w-96 h-64 bg-yourchatbg rounded-md">
-                    프로필 생성 페이지
-                </div>
-                <div className="w-96 h-32 my-4 bg-yourchatbg rounded-md">
-                    본인 프로필 선택
-                </div>
+                <AddUser />
+                <SelectMyProfile />
             </div>
         </div>
     );
