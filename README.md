@@ -2,6 +2,10 @@
 
 채팅방 이미지를 생성해주는 간단한 프로젝트입니다.
 
+## 배포 링크
+
+https://guddnboy.github.io/chat-image-generator
+
 # 기능 요구사항
 
 ## 참여자 관리
