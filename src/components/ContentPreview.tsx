@@ -1,27 +1,26 @@
 "use client";
 import React from "react";
-import defaultProfile from "../../public/images/default.png";
-import Image from "next/image";
+import UserMessagePreview from "./UserMessagePreview";
+import { useUserStore } from "../store/useUserStore";
 
 const ContentPreview = () => {
+    const users = useUserStore((state) => state.users);
+    console.log(users);
+
     return (
-        <div className="w-80 h-96">
-            <div className="flex h-12 border-2">
-                <li className="flex">
-                    <div className="flex text-sm">
-                        <div className="flex justify-center items-center align-middle overflow-hidden">
-                            <Image
-                                className="text-sm size-10 rounded-full"
-                                src={defaultProfile}
-                                alt="프로필"></Image>
-                        </div>
-                        <div className="text-sm w-10">유저</div>
-                        <div className="flex items-center w-auto h-auto px-2 m-1 bg-yourchatbg text-sm rounded-md">
-                            메세지 내용
-                        </div>
-                        <div className="flex items-end">시간</div>
+        <div className="w-80 h-96 border-2 overflow-y-scroll">
+            <div className="flex flex-col">
+                {users.map((user, index) => (
+                    <div
+                        key={index}
+                        className="flex my-1 p-2 border-b border-gray-300">
+                        <UserMessagePreview
+                            username={user.name}
+                            message={user.message}
+                            time={user.time}
+                        />
                     </div>
-                </li>
+                ))}
             </div>
         </div>
     );
