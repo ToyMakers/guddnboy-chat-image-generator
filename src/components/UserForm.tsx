@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import CreateModal from "./Modal/createModal";
+import NewProfileModal from "./Modal/NewProfileModal";
 import { useUserStore } from "../store/useUserStore";
 import AddUser from "../../public/images/addUser.png";
+import deleteImg from "../../public/images/delete.png";
 
-const UserForm = ({ userIndex }: { userIndex: number }) => {
+const UserForm = ({
+    userIndex,
+    onRemove,
+}: {
+    userIndex: number;
+    onRemove: () => void;
+}) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const users = useUserStore((state) => state.users);
@@ -65,10 +72,10 @@ const UserForm = ({ userIndex }: { userIndex: number }) => {
     };
 
     return (
-        <section className="flex justify-between items-center mb-4 h-auto">
+        <section className="relative group w-full flex justify-around items-center mb-4 h-12 transition rounded-md hover:bg-slate-200">
             <div className="w-auto">
                 <div className="w-32 h-8">
-                    <section className="flex justify-between items-center mb-4 h-auto">
+                    <section className="flex justify-between items-center mb-4 h-auto transition rounded-md hover:bg-slate-400">
                         <div className="w-auto relative">
                             <button
                                 onClick={handleDropdownToggle}
@@ -106,7 +113,7 @@ const UserForm = ({ userIndex }: { userIndex: number }) => {
                             )}
                             {isOpen && (
                                 <div className="w-full h-full fixed">
-                                    <CreateModal
+                                    <NewProfileModal
                                         title={"새 사용자 추가하기"}
                                         handleClose={handleModalClose}
                                     />
@@ -122,7 +129,7 @@ const UserForm = ({ userIndex }: { userIndex: number }) => {
                     placeholder="메세지를 입력하세요"
                     value={message}
                     onChange={handleMessageChange}
-                    className="px-2 w-48"
+                    className="px-2 w-48 transition rounded-md hover:bg-slate-300"
                 />
             </div>
             <div className="w-auto">
@@ -130,8 +137,17 @@ const UserForm = ({ userIndex }: { userIndex: number }) => {
                     type="time"
                     value={time}
                     onChange={handleTimeChange}
-                    className="w-32"
+                    className="w-32 transition rounded-md hover:bg-slate-300"
                 />
+            </div>
+            <div className="absolute right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <button onClick={onRemove}>
+                    <Image
+                        src={deleteImg}
+                        alt="삭제"
+                        className="size-5 hover:cursor-pointer"
+                    />
+                </button>
             </div>
         </section>
     );
