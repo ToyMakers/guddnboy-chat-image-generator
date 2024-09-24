@@ -10,8 +10,7 @@ interface UserList {
     users: User[];
     addUser: (user: User) => void;
     updateUser: (index: number, user: User) => void;
-    removeUser: (name: string) => void;
-    clearUsers: () => void;
+    removeUser: (index: number) => void;
 }
 
 export const useUserStore = create<UserList>((set) => ({
@@ -28,10 +27,8 @@ export const useUserStore = create<UserList>((set) => ({
             updatedUsers[index] = user;
             return { users: updatedUsers };
         }),
-    removeUser: (name) =>
+    removeUser: (index: number) =>
         set((state) => ({
-            users: state.users.filter((user) => user.name !== name),
+            users: state.users.filter((_, i) => i !== index),
         })),
-
-    clearUsers: () => set(() => ({ users: [] })),
 }));
