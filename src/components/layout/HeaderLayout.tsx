@@ -6,7 +6,7 @@ const HeaderLayout = () => {
         <>
             <div className="flex max-w-full h-24 justify-between items-center mx-auto">
                 <div>
-                    <Link href={"/home"}>채팅 이미지 생성</Link>
+                    <Link href={"/"}>채팅 이미지 생성</Link>
                 </div>
                 <div className="flex gap-2">
                     <div>모양 바꾸기</div>
