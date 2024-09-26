@@ -35,8 +35,14 @@ const CreateModal = ({
   };
 
   return (
-    <div className="flex fixed inset-0 bg-gray-700 bg-opacity-70 items-center justify-center">
+    <div className="flex fixed inset-0 z-1 bg-gray-700 bg-opacity-70 items-center justify-center">
       <div className="bg-white p-6 rounded-md">
+        <div className="w-full flex justify-end size-10 text-xl">
+          <button onClick={handleClose} className="size-10">
+            X
+          </button>
+        </div>
+
         <h2 className="text-lg font-bold">{title}</h2>
         <section>
           <div>
