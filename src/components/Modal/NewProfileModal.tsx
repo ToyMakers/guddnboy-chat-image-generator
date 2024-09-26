@@ -24,6 +24,10 @@ const CreateModal = ({
       alert("이름을 입력해주세요.");
       return;
     }
+    if (name.length > 5) {
+      alert("이름은 5글자 이하로 입력해주세요.");
+      return;
+    }
     const newUser = {
       name,
       profilePicture,
@@ -43,9 +47,9 @@ const CreateModal = ({
           </button>
         </div>
 
-        <h2 className="text-lg font-bold">{title}</h2>
-        <section>
-          <div>
+        <h2 className="text-2xl font-bold mb-8">{title}</h2>
+        <section className="w-[420px] h-[180px]">
+          <div className="flex justify-between items-center">
             이름
             <input
               type="text"
@@ -53,16 +57,16 @@ const CreateModal = ({
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="border p-2 rounded-md w-full mt-4"
+              className="w-72 border p-4 rounded-md"
             />
           </div>
-          <div className="mt-4">
-            <label htmlFor="profile">프로필 사진</label>
+          <div className="flex justify-between items-center mt-4 gap-1">
+            프로필 사진
             <input
               type="file"
               id="profile"
               onChange={(e) => setProfilePicture(e.target.files?.[0] || null)}
-              className="mt-2"
+              className="w-72 border p-4 rounded-md"
             />
           </div>
         </section>
