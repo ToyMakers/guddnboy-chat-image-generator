@@ -40,7 +40,6 @@ const UserForm = ({
     setMessage(newMessage);
     updateUser(userIndex, {
       name: selectedName,
-      profilePicture: null,
       message: newMessage,
       time,
     });
@@ -51,7 +50,6 @@ const UserForm = ({
     setTime(newTime);
     updateUser(userIndex, {
       name: selectedName,
-      profilePicture: null,
       message,
       time: newTime,
     });
@@ -67,7 +65,6 @@ const UserForm = ({
     setSelectedName(name);
     updateUser(userIndex, {
       name,
-      profilePicture: null,
       message,
       time,
     });
@@ -79,7 +76,7 @@ const UserForm = ({
       <div className="flex w-auto hover:border border-solid rounded-md border-slate-300">
         <div className="flex items-center w-32 h-11">
           <section className="flex items-center justify-between h-auto ">
-            <div className="w-32 relative z-2 ">
+            <div className="w-32 relative ">
               <button
                 onClick={handleDropdownToggle}
                 className="w-32 h-12 text-center  rounded-md outline-none appearance-none hover:cursor-pointe">
