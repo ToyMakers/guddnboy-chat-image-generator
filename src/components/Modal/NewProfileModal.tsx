@@ -15,10 +15,6 @@ const CreateModal = ({
   const [name, setName] = useState("");
   const [profilePicture, setProfilePicture] = useState<File | null>(null);
 
-  // const userForms = useFormsStore((state) => state.userForms);
-  // const addUserForm = useFormsStore((state) => state.addUserForm);
-  // const removeUserForm = useFormsStore((state) => state.removeUserForm);
-
   const handleAddUser = () => {
     if (!name) {
       alert("이름을 입력해주세요.");
@@ -39,7 +35,7 @@ const CreateModal = ({
   };
 
   return (
-    <div className="flex fixed inset-0 z-1 bg-gray-700 bg-opacity-70 items-center justify-center">
+    <div className="flex fixed inset-0 z-0 bg-gray-700 bg-opacity-70 items-center justify-center">
       <div className="bg-white p-6 rounded-md">
         <div className="w-full flex justify-end size-10 text-xl">
           <button onClick={handleClose} className="size-10">
