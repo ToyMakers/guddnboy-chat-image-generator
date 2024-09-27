@@ -4,7 +4,6 @@ interface User {
   name: string;
   message: string;
   time: string;
-  profilePicture: File | null;
 }
 
 interface UserList {
@@ -16,8 +15,11 @@ interface UserList {
 
 export const useUserStore = create<UserList>((set) => ({
   users: [],
-
-  addUser: (user) => set((state) => ({ users: [...state.users, user] })),
+  selectedUsers: [],
+  addUser: (user) =>
+    set((state) => ({
+      users: [...state.users, user],
+    })),
 
   removeUser: (index) =>
     set((state) => ({
