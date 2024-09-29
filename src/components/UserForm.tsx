@@ -1,30 +1,27 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import NewProfileModal from "./Modal/NewProfileModal";
-import { useUserStore } from "../store/useUserStore";
+
 import AddUser from "../../public/images/addUser.png";
 import deleteImg from "../../public/images/delete.png";
 
 const UserForm = ({
-  userIndex,
   onRemove,
 }: {
   userIndex: number;
   onRemove: () => void;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [time, setTime] = useState("");
 
-  const users = useUserStore((state) => state.users);
-  const updateUser = useUserStore((state) => state.updateUser);
-
-  const selectedUser = users[userIndex] || {
-    name: "",
-    message: "",
-    time: "",
+  const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMessage(e.target.value);
   };
-  const [selectedName, setSelectedName] = useState(selectedUser.name);
-  const [message, setMessage] = useState(selectedUser.message);
-  const [time, setTime] = useState(selectedUser.time);
+
+  const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTime(e.target.value);
+  };
 
   const handleModalOpen = () => {
     setIsOpen(true);
@@ -35,40 +32,10 @@ const UserForm = ({
     setIsOpen(false);
   };
 
-  const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newMessage = e.target.value;
-    setMessage(newMessage);
-    updateUser(userIndex, {
-      name: selectedName,
-      message: newMessage,
-      time,
-    });
-  };
-
-  const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newTime = e.target.value;
-    setTime(newTime);
-    updateUser(userIndex, {
-      name: selectedName,
-      message,
-      time: newTime,
-    });
-  };
-
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleDropdownToggle = () => {
     setIsDropdownOpen((prev) => !prev);
-  };
-
-  const handleNameChange = (name: string) => {
-    setSelectedName(name);
-    updateUser(userIndex, {
-      name,
-      message,
-      time,
-    });
-    setIsDropdownOpen(false);
   };
 
   return (
@@ -80,18 +47,20 @@ const UserForm = ({
               <button
                 onClick={handleDropdownToggle}
                 className="w-32 h-12 text-center  rounded-md outline-none appearance-none hover:cursor-pointe">
-                {selectedUser.name || "프로필 선택"}
+                {/* {profiles.length > 0
+                  ? profiles.map((profile) => profile.name).join(", ")
+                  : "프로필 선택"} */}
               </button>
               {isDropdownOpen && (
                 <div className="absolute left-0 right-0 mt-1 bg-white border border-solid border-slate-300 rounded-md shadow-md z-10">
-                  {users.map((user: { name: string }, index: number) => (
+                  {/* {profiles.map((user: { name: string }, index: number) => (
                     <button
                       key={index}
-                      onClick={() => handleNameChange(user.name)}
+                      onClick={() => {}}
                       className="block w-full h-12 items-center text-left px-2 py-1 hover:bg-gray-200 rounded-md">
                       {user.name}
                     </button>
-                  ))}
+                  ))} */}
                   <button
                     onClick={handleModalOpen}
                     className="flex justify-between w-full h-12 text-left items-center px-2 py-1 hover:bg-gray-200 rounded-md">
