@@ -1,8 +1,43 @@
 "use client";
 
 import React, { Fragment } from "react";
+import { useMessageStore } from "@/store/useUserFormStore";
+import { useProfileStore } from "@/store/useUserFormStore";
+import UserForm from "../UserForm";
+import defaultImage from "../../../public/images/default.png";
 
 const AddMessageComponent = () => {
+  const profiles = useProfileStore((state) => state.profiles);
+  const messages = useMessageStore((state) => state.messages);
+
+  const addProfile = useProfileStore((state) => state.addProfile);
+  const removeProfile = useProfileStore((state) => state.removeProfile);
+
+  const addMessage = useMessageStore((state) => state.addMessage);
+  const removeMessage = useMessageStore((state) => state.removeMessage);
+
+  const addNewUserForm = () => {
+    const newProfile = {
+      id: String(profiles.length),
+      profileImage: defaultImage,
+      name: "",
+    };
+
+    const newMessage = {
+      id: String(profiles.length),
+      message: "",
+      time: "",
+    };
+
+    addMessage(newMessage);
+    addProfile(newProfile.id, newProfile.profileImage, newProfile.name);
+  };
+
+  const deleteUserForm = (index: number) => {
+    removeMessage(messages[index].id);
+    removeProfile(profiles[index].id);
+  };
+
   return (
     <Fragment>
       <div className="w-full h-80 overflow-scroll">
@@ -15,18 +50,18 @@ const AddMessageComponent = () => {
           <div className="flex items-center size-12"></div>
         </section>
         <div className="w-full">
-          {/* {userForms.map((_, index) => (
+          {profiles.map((_, index) => (
             <UserForm
               key={index}
               userIndex={index}
-              onRemove={() => removeUserForm(index)}
+              onRemove={() => deleteUserForm(index)}
             />
-          ))} */}
+          ))}
         </div>
       </div>
       <div className="w-full border border-solid rounded-md border-slate-400">
         <button
-          onClick={() => {}}
+          onClick={addNewUserForm}
           className="w-full bg-chatbg text-white py-2 px-4 rounded-md transition hover:bg-gray-500">
           메세지 추가
         </button>
