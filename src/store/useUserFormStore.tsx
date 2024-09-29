@@ -1,8 +1,9 @@
 import { create } from "zustand";
+import defaultImage from "../../public/images/default.png";
 
 interface Profile {
   id: string;
-  profileImage: File | null;
+  profileImage: File | null | typeof defaultImage;
   name: string;
 }
 
@@ -15,7 +16,12 @@ interface Message {
 interface ProfileStore {
   profiles: Profile[];
   selectedProfileId: string | null;
-  addProfile: (profile: Profile) => void;
+
+  addProfile: (
+    id: string,
+    profileImage: File | typeof defaultImage,
+    name: string
+  ) => void;
   removeProfile: (id: string) => void;
   selectProfile: (id: string) => void;
 }
@@ -29,8 +35,11 @@ interface MessageStore {
 export const useProfileStore = create<ProfileStore>((set) => ({
   profiles: [],
   selectedProfileId: null,
-  addProfile: (profile) =>
-    set((state) => ({ profiles: [...state.profiles, profile] })),
+
+  addProfile: (id, profileImage, name) =>
+    set((state) => ({
+      profiles: [...state.profiles, { id, profileImage, name }],
+    })),
   removeProfile: (id) =>
     set((state) => ({
       profiles: state.profiles.filter((profile) => profile.id !== id),
