@@ -1,6 +1,5 @@
 "use client";
 // import { useFormsStore } from "@/store/useFormsStore";
-import { useUserStore } from "@/store/useUserStore";
 import React from "react";
 import { useState } from "react";
 
@@ -11,9 +10,7 @@ const CreateModal = ({
   title: string;
   handleClose: () => void;
 }) => {
-  const addUser = useUserStore((state) => state.addUser);
   const [name, setName] = useState("");
-  const [profilePicture, setProfilePicture] = useState<File | null>(null);
 
   const handleAddUser = () => {
     if (!name) {
@@ -24,13 +21,7 @@ const CreateModal = ({
       alert("이름은 5글자 이하로 입력해주세요.");
       return;
     }
-    const newUser = {
-      name,
-      profilePicture,
-      message: "",
-      time: "",
-    };
-    addUser(newUser);
+
     handleClose();
   };
 
@@ -61,7 +52,7 @@ const CreateModal = ({
             <input
               type="file"
               id="profile"
-              onChange={(e) => setProfilePicture(e.target.files?.[0] || null)}
+              onChange={() => {}}
               className="w-72 border p-4 rounded-md"
             />
           </div>

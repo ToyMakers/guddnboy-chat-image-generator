@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-import UserMessagePreview from "./UserMessagePreview";
-import { useUserStore } from "../store/useUserStore";
+
 import {
   useModifyBackgroundStore,
   useModifyMessageStore,
@@ -11,8 +10,6 @@ import {
 } from "../store/useModifyBooleanStore";
 
 const ContentPreview = () => {
-  const users = useUserStore((state) => state.users);
-
   const setIsModifyName = useModifyNameStore((state) => state.setIsModifyName);
   const setIsModifyMessage = useModifyMessageStore(
     (state) => state.setIsModifyMessage
@@ -40,15 +37,11 @@ const ContentPreview = () => {
       className="w-80 h-96 border border-solid rounded-md border-slate-400 overflow-y-scroll hover:border hover:border-gray-500"
       onClick={goToModifyBackground}>
       <div className="flex flex-col">
-        {users.map((user, index) => (
+        {/* {profiles.map((profile, index) => (
           <div key={index} className="flex my-1 p-2 border-b border-gray-300">
-            <UserMessagePreview
-              username={user.name}
-              message={user.message}
-              time={user.time}
-            />
+            <UserMessagePreview username={profile.name} message="" time="" />
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );
