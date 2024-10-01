@@ -2,34 +2,21 @@ import { create } from "zustand";
 import defaultImage from "../../public/images/default.png";
 
 interface Profile {
-  id: string;
+  id: number;
   profileImage: File | null | typeof defaultImage;
   name: string;
-}
-
-interface Message {
-  id: string;
-  message: string;
-  time: string;
+  message?: string;
+  time?: string;
 }
 
 interface ProfileStore {
   profiles: Profile[];
-  selectedProfileId: string | null;
+  selectedProfileId: number | null;
 
-  addProfile: (
-    id: string,
-    profileImage: File | typeof defaultImage,
-    name: string
-  ) => void;
-  removeProfile: (id: string) => void;
-  selectProfile: (id: string) => void;
-}
-
-interface MessageStore {
-  messages: Message[];
-  addMessage: (message: Message) => void;
-  removeMessage: (profileId: string) => void;
+  addProfile: (id: number, profileImage: File | null, name: string) => void;
+  updateUserMessage: (id: number, message: string, time: string) => void;
+  removeProfile: (id: number) => void;
+  setSelectProfileId: (id: number) => void;
 }
 
 export const useProfileStore = create<ProfileStore>((set) => ({
@@ -40,19 +27,22 @@ export const useProfileStore = create<ProfileStore>((set) => ({
     set((state) => ({
       profiles: [...state.profiles, { id, profileImage, name }],
     })),
+
+  updateUserMessage: (id: number, message: string, time: string) => {
+    set((state) => ({
+      profiles: state.profiles.map((profile) =>
+        profile.id === id ? { ...profile, message, time } : profile
+      ),
+    }));
+  },
+
   removeProfile: (id) =>
     set((state) => ({
       profiles: state.profiles.filter((profile) => profile.id !== id),
     })),
-  selectProfile: (id) => set({ selectedProfileId: id }),
-}));
 
-export const useMessageStore = create<MessageStore>((set) => ({
-  messages: [],
-  addMessage: (message) =>
-    set((state) => ({ messages: [...state.messages, message] })),
-  removeMessage: (id) =>
-    set((state) => ({
-      messages: state.messages.filter((message) => message.id !== id),
+  setSelectProfileId: (id: number) =>
+    set(() => ({
+      selectedProfileId: id,
     })),
 }));

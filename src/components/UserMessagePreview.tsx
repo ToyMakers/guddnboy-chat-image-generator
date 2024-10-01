@@ -10,10 +10,12 @@ import {
 } from "@/store/useModifyBooleanStore";
 
 const UserMessagePreview = ({
+  index,
   username,
   message,
   time,
 }: {
+  index: number;
   username: string;
   message: string;
   time: string;
@@ -71,6 +73,9 @@ const UserMessagePreview = ({
           className="text-sm size-10 rounded-full"
           src={defaultProfile}
           alt="프로필"></Image>
+      </div>
+      <div className="flex items-center w-10 h-6 hover:cursor-pointer hover:border border-solid border-slate-500">
+        {index}
       </div>
       <div
         className="text-sm w-10 h-6 hover:cursor-pointer hover:border border-solid border-slate-500 rounded-md"

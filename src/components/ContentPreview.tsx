@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-
 import {
   useModifyBackgroundStore,
   useModifyMessageStore,
@@ -8,6 +7,8 @@ import {
   useModifyTimeStore,
   useModifyProfileStore,
 } from "../store/useModifyBooleanStore";
+import UserMessagePreview from "./UserMessagePreview";
+import { useProfileStore } from "@/store/useUserFormStore";
 
 const ContentPreview = () => {
   const setIsModifyName = useModifyNameStore((state) => state.setIsModifyName);
@@ -32,16 +33,23 @@ const ContentPreview = () => {
     }
   };
 
+  const profiles = useProfileStore((state) => state.profiles);
+
   return (
     <div
       className="w-80 h-96 border border-solid rounded-md border-slate-400 overflow-y-scroll hover:border hover:border-gray-500"
       onClick={goToModifyBackground}>
       <div className="flex flex-col">
-        {/* {profiles.map((profile, index) => (
+        {profiles.map((profile, index) => (
           <div key={index} className="flex my-1 p-2 border-b border-gray-300">
-            <UserMessagePreview username={profile.name} message="" time="" />
+            <UserMessagePreview
+              index={index}
+              username={profile.name}
+              message={profile.message || ""}
+              time={profile.time || ""}
+            />
           </div>
-        ))} */}
+        ))}
       </div>
     </div>
   );
