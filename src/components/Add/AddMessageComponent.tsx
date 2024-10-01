@@ -1,41 +1,46 @@
 "use client";
 
 import React, { Fragment } from "react";
-import { useMessageStore } from "@/store/useUserFormStore";
 import { useProfileStore } from "@/store/useUserFormStore";
 import UserForm from "../UserForm";
 import defaultImage from "../../../public/images/default.png";
 
 const AddMessageComponent = () => {
+  const defaultImageFile = new File([defaultImage.src], "default.png", {
+    type: "image/png",
+  });
+
   const profiles = useProfileStore((state) => state.profiles);
-  const messages = useMessageStore((state) => state.messages);
 
   const addProfile = useProfileStore((state) => state.addProfile);
   const removeProfile = useProfileStore((state) => state.removeProfile);
-
-  const addMessage = useMessageStore((state) => state.addMessage);
-  const removeMessage = useMessageStore((state) => state.removeMessage);
+  const updateUserMessage = useProfileStore((state) => state.updateUserMessage);
 
   const addNewUserForm = () => {
-    const newProfile = {
-      id: String(profiles.length),
-      profileImage: defaultImage,
-      name: "",
+    const defaultProfile = {
+      id: profiles.length,
+      profileImage: defaultImageFile,
+      name: "프로필 선택",
     };
 
     const newMessage = {
-      id: String(profiles.length),
+      id: profiles.length,
       message: "",
       time: "",
     };
 
-    addMessage(newMessage);
-    addProfile(newProfile.id, newProfile.profileImage, newProfile.name);
+    updateUserMessage(newMessage.id, newMessage.message, newMessage.time);
+
+    addProfile(
+      defaultProfile.id,
+      defaultProfile.profileImage,
+      defaultProfile.name
+    );
+    console.log("profiles : ", profiles);
   };
 
   const deleteUserForm = (index: number) => {
-    removeMessage(messages[index].id);
-    removeProfile(profiles[index].id);
+    removeProfile(index);
   };
 
   return (
