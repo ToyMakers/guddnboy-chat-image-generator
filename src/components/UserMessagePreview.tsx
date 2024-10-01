@@ -9,7 +9,7 @@ import {
   useModifyProfileStore,
 } from "@/store/useModifyBooleanStore";
 
-import { useTimeStyleStore } from "@/store/time/useTimeStyleStore";
+import { useTimeStyleStore } from "@/store/ModifyStyle/useTimeStyleStore";
 
 const UserMessagePreview = ({
   username,

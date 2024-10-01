@@ -1,5 +1,5 @@
 import React from "react";
-import { useTimeStyleStore } from "@/store/time/useTimeStyleStore";
+import { useTimeStyleStore } from "@/store/ModifyStyle/useTimeStyleStore";
 
 const ModifyTimeComponent = () => {
   const { fontSize, textColor, setFontSize, setTextColor } =
