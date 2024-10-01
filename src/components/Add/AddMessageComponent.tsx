@@ -20,7 +20,7 @@ const AddMessageComponent = () => {
     const defaultProfile = {
       id: profiles.length,
       profileImage: defaultImageFile,
-      name: "프로필 선택",
+      name: "고양이",
     };
 
     const newMessage = {
