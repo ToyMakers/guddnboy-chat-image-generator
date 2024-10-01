@@ -9,13 +9,13 @@ import {
   useModifyProfileStore,
 } from "@/store/useModifyBooleanStore";
 
+import { useTimeStyleStore } from "@/store/time/useTimeStyleStore";
+
 const UserMessagePreview = ({
-  index,
   username,
   message,
   time,
 }: {
-  index: number;
   username: string;
   message: string;
   time: string;
@@ -31,6 +31,8 @@ const UserMessagePreview = ({
   const setIsModifyProfile = useModifyProfileStore(
     (state) => state.setIsModifyProfile
   );
+
+  const { fontSize, textColor } = useTimeStyleStore();
 
   const handleModifyName = () => {
     setIsModifyBackground(false);
@@ -67,15 +69,14 @@ const UserMessagePreview = ({
   return (
     <div className="flex text-sm">
       <div
-        className="flex size-10 justify-center items-center align-middle hover:cursor-pointer hover:border border-solid border-slate-500 rounded-full"
+        className="relative flex size-10 justify-center items-center align-middle hover:cursor-pointer hover:border border-solid border-slate-500 rounded-full"
         onClick={handleModifyProfile}>
         <Image
-          className="text-sm size-10 rounded-full"
+          layout="fill"
+          className="rounded-full"
+          objectFit="cover"
           src={defaultProfile}
           alt="프로필"></Image>
-      </div>
-      <div className="flex items-center w-10 h-6 hover:cursor-pointer hover:border border-solid border-slate-500">
-        {index}
       </div>
       <div
         className="text-sm w-10 h-6 hover:cursor-pointer hover:border border-solid border-slate-500 rounded-md"
@@ -89,7 +90,8 @@ const UserMessagePreview = ({
       </div>
       <div
         className="flex items-end hover:cursor-pointer hover:border border-solid border-slate-500"
-        onClick={handleModifyTime}>
+        onClick={handleModifyTime}
+        style={{ fontSize: fontSize, color: textColor }}>
         {time}
       </div>
     </div>
