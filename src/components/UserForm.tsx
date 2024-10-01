@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import NewProfileModal from "./Modal/NewProfileModal";
 import { useProfileStore } from "@/store/useUserFormStore";
+import { usePreviewStore } from "@/store/usePreviewStore"; // 추가: 프리뷰 스토어 가져오기
 
 import AddUser from "../../public/images/addUser.png";
 import deleteImg from "../../public/images/delete.png";
@@ -16,15 +17,16 @@ const UserForm = ({
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [time, setTime] = useState("");
-  const [selectedProfileIndex, setSelectedProfileIndex] = useState<
-    number | null
-  >(null);
+  const [selectedProfileIndex, setSelectedProfileIndex] = useState(Number);
 
   const profiles = useProfileStore((state) => state.profiles);
   const setSelectedProfileId = useProfileStore(
     (state) => state.setSelectProfileId
   );
   const updateUserMessage = useProfileStore((state) => state.updateUserMessage);
+  const addUserMessagePreview = usePreviewStore(
+    (state) => state.addUserMessagePreview
+  );
 
   const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTime = e.target.value;
@@ -32,6 +34,12 @@ const UserForm = ({
 
     if (selectedProfileIndex !== null) {
       updateUserMessage(selectedProfileIndex, message, newTime);
+      addUserMessagePreview(
+        selectedProfileIndex,
+        profiles[selectedProfileIndex].name,
+        message,
+        newTime
+      );
     }
   };
 
@@ -54,6 +62,12 @@ const UserForm = ({
 
     if (selectedProfileIndex !== null) {
       updateUserMessage(selectedProfileIndex, newMessage, time);
+      addUserMessagePreview(
+        selectedProfileIndex,
+        profiles[selectedProfileIndex].name,
+        newMessage,
+        time
+      );
     }
   };
 
@@ -64,10 +78,17 @@ const UserForm = ({
     setTime(profiles[index].time || "");
     setIsDropdownOpen(false);
 
+    // console.log("index : ", index);
+    // console.log("selectedProfileIndex : ", selectedProfileIndex);
+    // console.log("message : ", message);
+    // console.log("time : ", time);
+  };
+
+  useEffect(() => {
     console.log("selectedProfileIndex : ", selectedProfileIndex);
     console.log("message : ", message);
     console.log("time : ", time);
-  };
+  }, [selectedProfileIndex, message, time]);
 
   return (
     <section className="relative group w-full flex justify-around items-center mb-4 h-12 transition rounded-md bg-slate-100">
@@ -77,8 +98,9 @@ const UserForm = ({
             <div className="w-32 relative ">
               <button
                 onClick={handleDropdownToggle}
-                className="w-32 h-12 text-center rounded-md outline-none appearance-none hover:cursor-pointer"
-              />
+                className="w-32 h-12 text-center rounded-md outline-none appearance-none hover:cursor-pointer">
+                {profiles[selectedProfileIndex]?.name || "프로필 선택"}
+              </button>
               {isDropdownOpen && (
                 <div className="absolute left-0 right-0 mt-1 bg-white border border-solid border-slate-300 rounded-md shadow-md z-10">
                   {profiles.map((profile: { name: string }, index: number) => (
