@@ -9,6 +9,7 @@ import {
 } from "../store/useModifyBooleanStore";
 import UserMessagePreview from "./UserMessagePreview";
 import { useProfileStore } from "@/store/useUserFormStore";
+import { useBackgroundStyleStore } from "@/store/ModifyStyle/useBackgroundStyleStore";
 
 const ContentPreview = () => {
   const setIsModifyName = useModifyNameStore((state) => state.setIsModifyName);
@@ -33,6 +34,16 @@ const ContentPreview = () => {
     }
   };
 
+  const backgroundColor = useBackgroundStyleStore(
+    (state) => state.backgroundColor
+  );
+
+  const backgroundPadding = useBackgroundStyleStore(
+    (state) => state.backgroundPadding
+  );
+
+  const userFormGap = useBackgroundStyleStore((state) => state.userFormGap);
+
   const profiles = useProfileStore((state) => state.profiles);
   // const userMessagePreviews = usePreviewStore(
   //   (state) => state.userMessagePreviews
@@ -41,8 +52,12 @@ const ContentPreview = () => {
   return (
     <div
       className="w-80 h-96 border border-solid rounded-md border-slate-400 overflow-y-scroll hover:border hover:border-gray-500"
-      onClick={goToModifyBackground}>
-      <div className="flex flex-col">
+      onClick={goToModifyBackground}
+      style={{
+        backgroundColor: backgroundColor,
+        padding: `${backgroundPadding}px`,
+      }}>
+      <div className="flex flex-col" style={{ gap: `${userFormGap}px` }}>
         {profiles.map((profile, index) => (
           <div key={index} className="flex my-1 p-2 border-b border-gray-300">
             <UserMessagePreview
