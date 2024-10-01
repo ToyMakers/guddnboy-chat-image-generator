@@ -34,6 +34,9 @@ const ContentPreview = () => {
   };
 
   const profiles = useProfileStore((state) => state.profiles);
+  // const userMessagePreviews = usePreviewStore(
+  //   (state) => state.userMessagePreviews
+  // );
 
   return (
     <div
@@ -43,13 +46,21 @@ const ContentPreview = () => {
         {profiles.map((profile, index) => (
           <div key={index} className="flex my-1 p-2 border-b border-gray-300">
             <UserMessagePreview
-              index={index}
               username={profile.name}
               message={profile.message || ""}
               time={profile.time || ""}
             />
           </div>
         ))}
+        {/* {userMessagePreviews.map((preview, index) => (
+          <div key={index} className="flex my-1 p-2 border-b border-gray-300">
+            <UserMessagePreview
+              username={preview.name}
+              message={preview.message}
+              time={preview.time}
+            />
+          </div>
+        ))} */}
       </div>
     </div>
   );
