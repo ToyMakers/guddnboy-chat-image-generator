@@ -1,5 +1,5 @@
 import ContentPreview from "@/components/ContentPreview";
-import AddUser from "@/components/Add/AddUserPage";
+import AddUserPage from "@/components/Add/AddUserPage";
 
 export default function RootPage() {
   return (
@@ -8,7 +8,7 @@ export default function RootPage() {
         <ContentPreview />
       </div>
       <div className="w-full flex flex-col items-center ">
-        <AddUser />
+        <AddUserPage />
       </div>
     </div>
   );
