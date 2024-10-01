@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import NewProfileModal from "./Modal/NewProfileModal";
+import { useProfileStore } from "@/store/useUserFormStore";
 
 import AddUser from "../../public/images/addUser.png";
 import deleteImg from "../../public/images/delete.png";
@@ -11,16 +12,27 @@ const UserForm = ({
   userIndex: number;
   onRemove: () => void;
 }) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [time, setTime] = useState("");
+  const [selectedProfileIndex, setSelectedProfileIndex] = useState<
+    number | null
+  >(null);
 
-  const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMessage(e.target.value);
-  };
+  const profiles = useProfileStore((state) => state.profiles);
+  const setSelectedProfileId = useProfileStore(
+    (state) => state.setSelectProfileId
+  );
+  const updateUserMessage = useProfileStore((state) => state.updateUserMessage);
 
   const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTime(e.target.value);
+    const newTime = e.target.value;
+    setTime(newTime);
+
+    if (selectedProfileIndex !== null) {
+      updateUserMessage(selectedProfileIndex, message, newTime);
+    }
   };
 
   const handleModalOpen = () => {
@@ -32,10 +44,29 @@ const UserForm = ({
     setIsOpen(false);
   };
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
   const handleDropdownToggle = () => {
     setIsDropdownOpen((prev) => !prev);
+  };
+
+  const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newMessage = e.target.value;
+    setMessage(newMessage);
+
+    if (selectedProfileIndex !== null) {
+      updateUserMessage(selectedProfileIndex, newMessage, time);
+    }
+  };
+
+  const handleSelectProfile = (index: number) => {
+    setSelectedProfileIndex(index);
+    setSelectedProfileId(index);
+    setMessage(profiles[index].message || "");
+    setTime(profiles[index].time || "");
+    setIsDropdownOpen(false);
+
+    console.log("selectedProfileIndex : ", selectedProfileIndex);
+    console.log("message : ", message);
+    console.log("time : ", time);
   };
 
   return (
@@ -46,21 +77,18 @@ const UserForm = ({
             <div className="w-32 relative ">
               <button
                 onClick={handleDropdownToggle}
-                className="w-32 h-12 text-center  rounded-md outline-none appearance-none hover:cursor-pointe">
-                {/* {profiles.length > 0
-                  ? profiles.map((profile) => profile.name).join(", ")
-                  : "프로필 선택"} */}
-              </button>
+                className="w-32 h-12 text-center rounded-md outline-none appearance-none hover:cursor-pointer"
+              />
               {isDropdownOpen && (
                 <div className="absolute left-0 right-0 mt-1 bg-white border border-solid border-slate-300 rounded-md shadow-md z-10">
-                  {/* {profiles.map((user: { name: string }, index: number) => (
+                  {profiles.map((profile: { name: string }, index: number) => (
                     <button
                       key={index}
-                      onClick={() => {}}
+                      onClick={() => handleSelectProfile(index)}
                       className="block w-full h-12 items-center text-left px-2 py-1 hover:bg-gray-200 rounded-md">
-                      {user.name}
+                      {profile.name}
                     </button>
-                  ))} */}
+                  ))}
                   <button
                     onClick={handleModalOpen}
                     className="flex justify-between w-full h-12 text-left items-center px-2 py-1 hover:bg-gray-200 rounded-md">
@@ -81,6 +109,7 @@ const UserForm = ({
           </section>
         </div>
       </div>
+
       <div className="w-auto">
         <input
           type="text"
