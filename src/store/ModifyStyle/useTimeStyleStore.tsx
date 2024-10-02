@@ -1,15 +1,15 @@
 import { create } from "zustand";
 
 interface TimeStyleState {
-  fontSize: string;
-  textColor: string;
+  fontSize_time: string;
+  textColor_time: string;
   setFontSize: (size: string) => void;
   setTextColor: (color: string) => void;
 }
 
 export const useTimeStyleStore = create<TimeStyleState>((set) => ({
-  fontSize: "12px",
-  textColor: "#000000",
-  setFontSize: (size: string) => set({ fontSize: `${size}px` }),
-  setTextColor: (color: string) => set({ textColor: color }),
+  fontSize_time: "12px",
+  textColor_time: "#000000",
+  setFontSize: (size: string) => set({ fontSize_time: `${size}px` }),
+  setTextColor: (color: string) => set({ textColor_time: color }),
 }));

@@ -1,9 +1,9 @@
 import { create } from "zustand";
 
 interface NameStyle {
-  fontweight: string;
-  fontsize: string;
-  color: string;
+  fontweight_name: string;
+  fontsize_name: string;
+  color_name: string;
 
   setFontWeight: (fontweight: string) => void;
   setFontSize: (fontsize: string) => void;
@@ -11,11 +11,11 @@ interface NameStyle {
 }
 
 export const useNameStyleStore = create<NameStyle>((set) => ({
-  fontweight: "normal",
-  fontsize: "16px",
-  color: "black",
+  fontweight_name: "400",
+  fontsize_name: "12px",
+  color_name: "#000000",
 
-  setFontWeight: (fontweight) => set({ fontweight }),
-  setFontSize: (fontsize) => set({ fontsize }),
-  setColor: (color) => set({ color }),
+  setFontWeight: (weight) => set({ fontweight_name: weight }),
+  setFontSize: (size) => set({ fontsize_name: `${size}px` }),
+  setColor: (color) => set({ color_name: color }),
 }));

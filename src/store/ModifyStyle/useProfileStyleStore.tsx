@@ -1,32 +1,32 @@
 import { create } from "zustand";
 
 interface ProfileStyle {
-  width: string;
-  height: string;
+  width: number;
+  height: number;
   backgroundColor: string;
-  borderWidth: string;
-  borderRadius: string;
-  padding: string;
+  borderWidth: number;
+  borderRadius: number;
+  padding: number;
   borderColor: string;
   borderStyle: string;
 
-  setWidth: (width: string) => void;
-  setHeight: (height: string) => void;
+  setWidth: (width: number) => void;
+  setHeight: (height: number) => void;
   setBackgroundColor: (backgroundColor: string) => void;
-  setBorderWidth: (borderWidth: string) => void;
-  setBorderRadius: (borderRadius: string) => void;
-  setPadding: (padding: string) => void;
+  setBorderWidth: (borderWidth: number) => void;
+  setBorderRadius: (borderRadius: number) => void;
+  setPadding: (padding: number) => void;
   setBorderColor: (borderColor: string) => void;
   setBorderStyle: (borderStyle: string) => void;
 }
 
 export const useProfileStyleStore = create<ProfileStyle>((set) => ({
-  width: "100%",
-  height: "100%",
+  width: 40,
+  height: 40,
   backgroundColor: "#ffffff",
-  borderWidth: "0",
-  borderRadius: "0",
-  padding: "0",
+  borderWidth: 0,
+  borderRadius: 0,
+  padding: 0,
   borderColor: "#000000",
   borderStyle: "solid",
 

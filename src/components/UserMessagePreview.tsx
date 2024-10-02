@@ -10,6 +10,9 @@ import {
 } from "@/store/useModifyBooleanStore";
 
 import { useTimeStyleStore } from "@/store/ModifyStyle/useTimeStyleStore";
+import { useProfileStyleStore } from "@/store/ModifyStyle/useProfileStyleStore";
+import { useNameStyleStore } from "@/store/ModifyStyle/useNameStyleStore";
+import { useMessageStyleStore } from "@/store/ModifyStyle/useMessageStyleStore";
 
 const UserMessagePreview = ({
   username,
@@ -32,7 +35,27 @@ const UserMessagePreview = ({
     (state) => state.setIsModifyProfile
   );
 
-  const { fontSize, textColor } = useTimeStyleStore();
+  const { fontSize_time, textColor_time } = useTimeStyleStore();
+  const {
+    width,
+    height,
+    backgroundColor,
+    borderWidth,
+    borderRadius,
+    padding,
+    borderColor,
+    borderStyle,
+  } = useProfileStyleStore();
+  const { fontsize_name, fontweight_name, color_name } = useNameStyleStore();
+  const {
+    fontSize_Message,
+    fontWeight_Message,
+    fontPadding_Message,
+    fontColor_Message,
+    borderRounded_Message,
+    backgroundcolor_Message,
+    width_Message,
+  } = useMessageStyleStore();
 
   const handleModifyName = () => {
     setIsModifyBackground(false);
@@ -69,29 +92,50 @@ const UserMessagePreview = ({
   return (
     <div className="flex text-sm">
       <div
-        className="relative flex size-10 justify-center items-center align-middle hover:cursor-pointer hover:border border-solid border-slate-500 rounded-full"
+        className="relative flex size-10 justify-center items-center align-middle hover:cursor-pointer hover:border border-solid border-slate-500"
         onClick={handleModifyProfile}>
         <Image
-          layout="fill"
-          className="rounded-full"
-          objectFit="cover"
+          style={{
+            width: width,
+            height: height,
+            backgroundColor: backgroundColor,
+            borderWidth: borderWidth,
+            borderRadius: borderRadius,
+            padding: padding,
+            borderColor: borderColor,
+            borderStyle: borderStyle,
+          }}
           src={defaultProfile}
           alt="프로필"></Image>
       </div>
       <div
         className="text-sm w-10 h-6 hover:cursor-pointer hover:border border-solid border-slate-500 rounded-md"
-        onClick={handleModifyName}>
+        onClick={handleModifyName}
+        style={{
+          fontSize: fontsize_name,
+          fontWeight: fontweight_name,
+          color: color_name,
+        }}>
         {username}
       </div>
       <div
         className="flex items-center w-auto h-auto px-2 m-1 bg-yourchatbg text-sm rounded-md hover:cursor-pointer hover:border border-solid border-slate-500"
-        onClick={handleModifyMessage}>
+        onClick={handleModifyMessage}
+        style={{
+          fontSize: fontSize_Message,
+          fontWeight: fontWeight_Message,
+          padding: fontPadding_Message,
+          color: fontColor_Message,
+          borderRadius: borderRounded_Message,
+          backgroundColor: backgroundcolor_Message,
+          width: width_Message,
+        }}>
         {message}
       </div>
       <div
         className="flex items-end hover:cursor-pointer hover:border border-solid border-slate-500"
         onClick={handleModifyTime}
-        style={{ fontSize: fontSize, color: textColor }}>
+        style={{ fontSize: fontSize_time, color: textColor_time }}>
         {time}
       </div>
     </div>
