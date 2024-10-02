@@ -1,15 +1,15 @@
 import { create } from "zustand";
-import { useProfileStore } from "./useProfileStore"; // 프로필 스토어에서 이름과 이미지를 가져옴
+import { useProfileStore } from "./useProfileStore";
 
 interface UserMessage {
   id: number;
-  name: string; // 프로필 이름
-  message: string; // 메시지
-  time: string; // 시간
+  name: string;
+  message: string;
+  time: string;
 }
 
 interface UserMessageStore {
-  userMessagePreviews: UserMessage[]; // 메시지 프리뷰 목록
+  userMessagePreviews: UserMessage[];
 
   addUserMessagePreview: (
     selectedIndex: number,

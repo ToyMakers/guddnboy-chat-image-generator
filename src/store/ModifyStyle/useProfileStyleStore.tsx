@@ -25,8 +25,8 @@ export const useProfileStyleStore = create<ProfileStyle>((set) => ({
   height: 40,
   backgroundColor: "#ffffff",
   borderWidth: 0,
-  borderRadius: 0,
-  padding: 0,
+  borderRadius: 15,
+  padding: 2,
   borderColor: "#000000",
   borderStyle: "solid",
 
