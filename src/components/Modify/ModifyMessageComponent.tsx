@@ -70,6 +70,7 @@ const ModifyMessageComponent = () => {
             onChange={(e) => setFontColor(e.target.value)}
             placeholder={fontColor_Message}
           />
+          <div className="w-12 text-center text-timebg">T</div>
         </div>
       </section>
 
