@@ -26,34 +26,48 @@ const ModifyNameComponent = () => {
   };
 
   return (
-    <div className="w-full h-80 overflow-scroll">
-      <div>
-        글자굵기
-        <input
-          id="fontWeight"
-          type="number"
-          onChange={handleFontWeightChange}
-          placeholder={fontweight_name}
-        />
-      </div>
-      <div>
-        글자크기
-        <input
-          id="fontSize"
-          type="number"
-          onChange={handleFontSizeChange}
-          placeholder={fontsize_name}
-        />
-      </div>
-      <div>
-        글자색
-        <input
-          id="color_name"
-          type="color"
-          onChange={handleColorChange}
-          placeholder={color_name}
-        />
-      </div>
+    <div className="flex flex-col text-left w-full h-80 overflow-scroll">
+      <section className="mb-4">
+        <div className="text-lg">글자 굵기</div>
+        <div className="flex items-center justify-between w-full h-10 border border-solid border-gray-400 rounded-md">
+          <input
+            className="w-11/12 h-full pl-2 bg-inherit outline-none"
+            id="fontWeight"
+            type="number"
+            onChange={handleFontWeightChange}
+            placeholder={fontweight_name}
+          />
+          <div className="w-12 text-center text-timebg">1</div>
+        </div>
+      </section>
+
+      <section className="mb-4">
+        <div className="text-lg">글자 크기</div>
+        <div className="flex items-center justify-between w-full h-10 border border-solid border-gray-400 rounded-md">
+          <input
+            className="w-11/12 h-full pl-2 bg-inherit outline-none"
+            id="fontSize"
+            type="number"
+            onChange={handleFontSizeChange}
+            placeholder={fontsize_name}
+          />
+          <div className="w-12 text-center text-timebg">1</div>
+        </div>
+      </section>
+
+      <section className="mb-4">
+        <div className="text-lg">글자 색</div>
+        <div className="flex items-center justify-between w-full h-10 border border-solid border-gray-400 rounded-md">
+          <input
+            className="w-28 pl-2 bg-inherit"
+            id="color_name"
+            type="color"
+            onChange={handleColorChange}
+            placeholder={color_name}
+          />
+          <div className="w-12 text-center text-timebg">T</div>
+        </div>
+      </section>
     </div>
   );
 };
