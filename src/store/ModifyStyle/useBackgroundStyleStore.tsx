@@ -11,7 +11,7 @@ interface BackgroundStyleState {
 }
 
 export const useBackgroundStyleStore = create<BackgroundStyleState>((set) => ({
-  backgroundColor: "#ffffff",
+  backgroundColor: "#9bbbd4",
   backgroundPadding: "0",
   userFormGap: "0",
 
