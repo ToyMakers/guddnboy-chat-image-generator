@@ -2,7 +2,7 @@ import React from "react";
 import { useTimeStyleStore } from "@/store/ModifyStyle/useTimeStyleStore";
 
 const ModifyTimeComponent = () => {
-  const { fontSize, textColor, setFontSize, setTextColor } =
+  const { fontSize_time, textColor_time, setFontSize, setTextColor } =
     useTimeStyleStore();
 
   const handleFontSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +21,7 @@ const ModifyTimeComponent = () => {
         <input
           id="fontSize"
           type="number"
-          value={parseInt(fontSize)}
+          value={parseInt(fontSize_time)}
           onChange={handleFontSizeChange}
         />
       </div>
@@ -30,7 +30,7 @@ const ModifyTimeComponent = () => {
         <input
           id="textColor"
           type="color"
-          value={textColor}
+          value={textColor_time}
           onChange={handleTextColorChange}
         />
       </div>
