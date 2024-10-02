@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "../styles/reset.css";
 import "./globals.css";
-import HeaderLayout from "@/components/layout/HeaderLayout";
 
 export const metadata: Metadata = {
   title: "채팅 이미지 생성기",
@@ -15,10 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="max-w-[990px] mx-auto">
-        <HeaderLayout />
-        {children}
-      </body>
+      <body className="max-w-[990px] mx-auto">{children}</body>
     </html>
   );
 }

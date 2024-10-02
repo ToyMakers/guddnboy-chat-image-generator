@@ -8,7 +8,7 @@ import { useModifyTimeStore } from "@/store/useModifyBooleanStore";
 import { useModifyBackgroundStore } from "@/store/useModifyBooleanStore";
 import { useModifyProfileStore } from "@/store/useModifyBooleanStore";
 
-const HeaderLayout = () => {
+const HeaderLayout = ({ onCapture }: { onCapture: () => void }) => {
   const isModifyName = useModifyNameStore((state) => state.isModifyName);
   const isModifyMessage = useModifyMessageStore(
     (state) => state.isModifyMessage
@@ -72,13 +72,9 @@ const HeaderLayout = () => {
             </div>
           )}
 
-          {!isModifyName &&
-            !isModifyMessage &&
-            !isModifyTime &&
-            !isModifyBackground &&
-            !isModifyProfile && <div>모양 수정하기</div>}
-
-          <div>이미지로 저장하기</div>
+          <div>
+            <button onClick={onCapture}>이미지로 저장하기</button>
+          </div>
         </div>
       </div>
       <div className="border-b-[1px] border-gray-500 border-solid w-full mb-4"></div>
