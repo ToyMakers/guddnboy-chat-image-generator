@@ -128,7 +128,7 @@ const UserForm = ({
       <div className="w-auto">
         <input
           type="text"
-          placeholder="메세지를 입력하세요"
+          placeholder={profiles[userIndex]?.message || "메세지를 입력하세요."}
           value={message}
           onChange={handleMessageChange}
           className="px-2 w-64 h-12 transition rounded-md bg-slate-100 outline-none hover:border border-solid border-slate-300"

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useProfileStore } from "@/store/useProfileStore";
 import UserForm from "../UserForm";
 import defaultImage from "../../../public/images/default.png";
@@ -47,6 +47,10 @@ const AddMessageComponent = () => {
   const deleteUserForm = (index: number) => {
     removeProfile(index);
   };
+
+  useEffect(() => {
+    addNewUserForm;
+  }, []);
 
   return (
     <Fragment>

@@ -92,9 +92,9 @@ const UserMessagePreview = ({
   return (
     <div className="flex text-sm">
       <div
-        className="relative flex size-10 justify-center items-center align-middle hover:cursor-pointer hover:border border-solid border-slate-500"
+        className="relative flex justify-center items-center align-middle hover:cursor-pointer hover:border border-solid border-slate-500"
         onClick={handleModifyProfile}>
-        <Image
+        <img
           style={{
             width: width,
             height: height,
@@ -105,8 +105,9 @@ const UserMessagePreview = ({
             borderColor: borderColor,
             borderStyle: borderStyle,
           }}
-          src={defaultProfile}
-          alt="프로필"></Image>
+          src={defaultProfile.src}
+          alt="프로필"
+        />
       </div>
       <div
         className="text-sm w-10 h-6 hover:cursor-pointer hover:border border-solid border-slate-500 rounded-md"
