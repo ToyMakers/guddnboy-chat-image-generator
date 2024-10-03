@@ -8,7 +8,7 @@ import {
   useModifyProfileStore,
 } from "../store/useModifyBooleanStore";
 import UserMessagePreview from "./UserMessagePreview";
-import { useProfileStore } from "@/store/useUserFormStore";
+import { useProfileStore } from "@/store/useProfileStore";
 import { useBackgroundStyleStore } from "@/store/ModifyStyle/useBackgroundStyleStore";
 
 const ContentPreview = () => {

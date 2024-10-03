@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import NewProfileModal from "./Modal/NewProfileModal";
-import { useProfileStore } from "@/store/useUserFormStore";
-import { usePreviewStore } from "@/store/usePreviewStore"; // 추가: 프리뷰 스토어 가져오기
+import { useProfileStore } from "@/store/useProfileStore";
 
 import AddUser from "../../public/images/addUser.png";
 import deleteImg from "../../public/images/delete.png";
 
 const UserForm = ({
   onRemove,
+  userIndex,
 }: {
   userIndex: number;
   onRemove: () => void;
@@ -16,31 +16,19 @@ const UserForm = ({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
-  const [time, setTime] = useState("");
-  const [selectedProfileIndex, setSelectedProfileIndex] = useState(Number);
+  const [userNames, setUserNames] = useState<string[]>([]);
 
   const profiles = useProfileStore((state) => state.profiles);
-  const setSelectedProfileId = useProfileStore(
-    (state) => state.setSelectProfileId
-  );
   const updateUserMessage = useProfileStore((state) => state.updateUserMessage);
-  const addUserMessagePreview = usePreviewStore(
-    (state) => state.addUserMessagePreview
-  );
 
   const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTime = e.target.value;
-    setTime(newTime);
-
-    if (selectedProfileIndex !== null) {
-      updateUserMessage(selectedProfileIndex, message, newTime);
-      addUserMessagePreview(
-        selectedProfileIndex,
-        profiles[selectedProfileIndex].name,
-        message,
-        newTime
-      );
-    }
+    updateUserMessage(
+      userIndex,
+      profiles[userIndex].name,
+      profiles[userIndex].message ?? "",
+      newTime
+    );
   };
 
   const handleModalOpen = () => {
@@ -60,35 +48,32 @@ const UserForm = ({
     const newMessage = e.target.value;
     setMessage(newMessage);
 
-    if (selectedProfileIndex !== null) {
-      updateUserMessage(selectedProfileIndex, newMessage, time);
-      addUserMessagePreview(
-        selectedProfileIndex,
-        profiles[selectedProfileIndex].name,
-        newMessage,
-        time
-      );
-    }
+    updateUserMessage(
+      userIndex,
+      profiles[userIndex].name,
+      message,
+      profiles[userIndex].time ?? ""
+    );
+
+    console.log("newMessage : ", newMessage);
   };
 
-  const handleSelectProfile = (index: number) => {
-    setSelectedProfileIndex(index);
-    setSelectedProfileId(index);
-    setMessage(profiles[index].message || "");
-    setTime(profiles[index].time || "");
-    setIsDropdownOpen(false);
-
-    // console.log("index : ", index);
-    // console.log("selectedProfileIndex : ", selectedProfileIndex);
-    // console.log("message : ", message);
-    // console.log("time : ", time);
+  const getUserNames = () => {
+    const names = Array.from(new Set(profiles.map((item) => item.name)));
+    setUserNames(names);
+    console.log("names : ", names);
   };
 
   useEffect(() => {
-    console.log("selectedProfileIndex : ", selectedProfileIndex);
-    console.log("message : ", message);
-    console.log("time : ", time);
-  }, [selectedProfileIndex, message, time]);
+    console.log("profiles : ", profiles);
+    getUserNames();
+    updateUserMessage(
+      userIndex,
+      profiles[userIndex].name,
+      message,
+      profiles[userIndex].time ?? ""
+    );
+  }, [message]);
 
   return (
     <section className="relative group w-full flex justify-around items-center mb-4 h-12 transition rounded-md bg-slate-100">
@@ -99,16 +84,24 @@ const UserForm = ({
               <button
                 onClick={handleDropdownToggle}
                 className="w-32 h-12 text-center rounded-md outline-none appearance-none hover:cursor-pointer">
-                {profiles[selectedProfileIndex]?.name || "프로필 선택"}
+                {profiles[userIndex]?.name || "프로필 선택"}
               </button>
               {isDropdownOpen && (
                 <div className="absolute left-0 right-0 mt-1 bg-white border border-solid border-slate-300 rounded-md shadow-md z-10">
-                  {profiles.map((profile: { name: string }, index: number) => (
+                  {userNames.map((name, index) => (
                     <button
                       key={index}
-                      onClick={() => handleSelectProfile(index)}
+                      onClick={() => {
+                        updateUserMessage(
+                          userIndex,
+                          name,
+                          `${profiles[userIndex].message}`,
+                          `${profiles[userIndex].time}`
+                        ),
+                          setIsDropdownOpen(false);
+                      }}
                       className="block w-full h-12 items-center text-left px-2 py-1 hover:bg-gray-200 rounded-md">
-                      {profile.name}
+                      {name}
                     </button>
                   ))}
                   <button
@@ -144,7 +137,6 @@ const UserForm = ({
       <div className="w-auto">
         <input
           type="time"
-          value={time}
           onChange={handleTimeChange}
           className="w-32 h-12 transition rounded-md bg-slate-100 outline-none hover:border border-solid border-slate-300"
         />

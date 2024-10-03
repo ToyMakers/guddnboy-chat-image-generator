@@ -1,7 +1,7 @@
 "use client";
 
 import React, { Fragment } from "react";
-import { useProfileStore } from "@/store/useUserFormStore";
+import { useProfileStore } from "@/store/useProfileStore";
 import UserForm from "../UserForm";
 import defaultImage from "../../../public/images/default.png";
 
@@ -29,7 +29,12 @@ const AddMessageComponent = () => {
       time: "",
     };
 
-    updateUserMessage(newMessage.id, newMessage.message, newMessage.time);
+    updateUserMessage(
+      newMessage.id,
+      defaultProfile.name,
+      newMessage.message,
+      newMessage.time
+    );
 
     addProfile(
       defaultProfile.id,
