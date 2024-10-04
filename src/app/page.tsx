@@ -3,7 +3,7 @@
 import React, { useRef } from "react";
 import html2canvas from "html2canvas";
 import ContentPreview from "../components/ContentPreview";
-import AddUserPage from "../components/add/AddUserPage";
+import AddUser from "../components/add/AddUser";
 import HeaderLayout from "../components/layout/HeaderLayout";
 
 export default function RootPage() {
@@ -37,7 +37,7 @@ export default function RootPage() {
           <ContentPreview />
         </div>
         <div className="w-full flex flex-col items-center">
-          <AddUserPage />
+          <AddUser />
         </div>
       </div>
     </div>

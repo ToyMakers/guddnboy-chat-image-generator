@@ -3,9 +3,6 @@ import Image from "next/image";
 import NewProfileModal from "./modal/NewProfileModal";
 import { useProfileStore } from "../store/useProfileStore";
 
-import AddUser from "../../public/images/addUser.png";
-import deleteImg from "../../public/images/delete.png";
-
 const UserForm = ({
   onRemove,
   userIndex,
@@ -108,7 +105,12 @@ const UserForm = ({
                     onClick={handleModalOpen}
                     className="flex justify-between w-full h-12 text-left items-center px-2 py-1 hover:bg-gray-200 rounded-md">
                     추가
-                    <Image src={AddUser} alt="추가" className="size-5" />
+                    <Image
+                      width={20}
+                      height={20}
+                      src="../images/addUser.png"
+                      alt="추가"
+                    />
                   </button>
                 </div>
               )}
@@ -144,9 +146,11 @@ const UserForm = ({
       <div className="flex justify-center size-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-slate-300 rounded-md">
         <button onClick={onRemove}>
           <Image
-            src={deleteImg}
+            width={20}
+            height={20}
+            src="/images/delete.png"
             alt="삭제"
-            className="size-5 hover:cursor-pointer"
+            className="hover:cursor-pointer"
           />
         </button>
       </div>
