@@ -16,7 +16,7 @@ import {
   useModifyBackgroundStore,
 } from "../../store/useModifyBooleanStore";
 
-const AddUserPage = () => {
+const AddUser = () => {
   const isModifyName = useModifyNameStore((state) => state.isModifyName);
   const isModifyMessage = useModifyMessageStore(
     (state) => state.isModifyMessage
@@ -45,4 +45,4 @@ const AddUserPage = () => {
   );
 };
 
-export default AddUserPage;
+export default AddUser;
