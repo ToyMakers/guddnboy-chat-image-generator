@@ -1,18 +1,17 @@
 import React from "react";
 import Image from "next/image";
-import defaultProfile from "../../public/images/default.png";
 import {
   useModifyMessageStore,
   useModifyNameStore,
   useModifyTimeStore,
   useModifyBackgroundStore,
   useModifyProfileStore,
-} from "@/store/useModifyBooleanStore";
+} from "../store/useModifyBooleanStore";
 
-import { useTimeStyleStore } from "@/store/ModifyStyle/useTimeStyleStore";
-import { useProfileStyleStore } from "@/store/ModifyStyle/useProfileStyleStore";
-import { useNameStyleStore } from "@/store/ModifyStyle/useNameStyleStore";
-import { useMessageStyleStore } from "@/store/ModifyStyle/useMessageStyleStore";
+import { useTimeStyleStore } from "../store/modifyStyle/useTimeStyleStore";
+import { useProfileStyleStore } from "../store/modifyStyle/useProfileStyleStore";
+import { useNameStyleStore } from "../store/modifyStyle/useNameStyleStore";
+import { useMessageStyleStore } from "../store/modifyStyle/useMessageStyleStore";
 
 const UserMessagePreview = ({
   username,
@@ -94,10 +93,8 @@ const UserMessagePreview = ({
       <div
         className="relative flex justify-center items-center align-middle hover:cursor-pointer hover:border border-solid border-slate-500"
         onClick={handleModifyProfile}>
-        <img
+        <Image
           style={{
-            width: width,
-            height: height,
             backgroundColor: backgroundColor,
             borderWidth: borderWidth,
             borderRadius: borderRadius,
@@ -105,7 +102,9 @@ const UserMessagePreview = ({
             borderColor: borderColor,
             borderStyle: borderStyle,
           }}
-          src={defaultProfile.src}
+          width={width}
+          height={height}
+          src="/images/default.png"
           alt="프로필"
         />
       </div>

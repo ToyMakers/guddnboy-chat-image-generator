@@ -1,7 +1,7 @@
 "use client";
 
 import React, { Fragment, useEffect } from "react";
-import { useProfileStore } from "@/store/useProfileStore";
+import { useProfileStore } from "../../store/useProfileStore";
 import UserForm from "../UserForm";
 import defaultImage from "../../../public/images/default.png";
 

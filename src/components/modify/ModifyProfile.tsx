@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useProfileStyleStore } from "@/store/ModifyStyle/useProfileStyleStore";
+import { useProfileStyleStore } from "@/store/modifyStyle/useProfileStyleStore";
 
 const ModifyProfileComponent = () => {
   const {

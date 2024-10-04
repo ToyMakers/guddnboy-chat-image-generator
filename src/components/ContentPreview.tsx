@@ -8,8 +8,8 @@ import {
   useModifyProfileStore,
 } from "../store/useModifyBooleanStore";
 import UserMessagePreview from "./UserMessagePreview";
-import { useProfileStore } from "@/store/useProfileStore";
-import { useBackgroundStyleStore } from "@/store/ModifyStyle/useBackgroundStyleStore";
+import { useProfileStore } from "../store/useProfileStore";
+import { useBackgroundStyleStore } from "../store/modifyStyle/useBackgroundStyleStore";
 
 const ContentPreview = () => {
   const setIsModifyName = useModifyNameStore((state) => state.setIsModifyName);
