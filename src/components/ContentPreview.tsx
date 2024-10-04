@@ -58,6 +58,7 @@ const ContentPreview = () => {
         {profiles.map((profile, index) => (
           <div key={index} className="flex my-1 p-2 border-b border-gray-300">
             <UserMessagePreview
+              profileImage={profile.profileImage}
               username={profile.name}
               message={profile.message ?? ""}
               time={profile.time ?? ""}

@@ -3,8 +3,8 @@
 import React, { useRef } from "react";
 import html2canvas from "html2canvas";
 import ContentPreview from "../components/ContentPreview";
-import AddUser from "../components/add/AddUser";
 import HeaderLayout from "../components/layout/HeaderLayout";
+import AddUser from "../components/add/AddUser";
 
 export default function RootPage() {
   const contentPreviewRef = useRef<HTMLDivElement>(null);

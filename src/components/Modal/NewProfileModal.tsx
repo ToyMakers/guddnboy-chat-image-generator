@@ -2,7 +2,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useProfileStore } from "../../stores/useProfileStore";
-import defaultImage from "../../../public/images/default.png";
 
 const NewProfileModal = ({
   title,
@@ -13,10 +12,6 @@ const NewProfileModal = ({
 }) => {
   const [name, setName] = useState("");
   const [profileImage, setProfileImage] = useState<File | null>();
-
-  const defaultImageFile = new File([defaultImage.src], "default.png", {
-    type: "image/png",
-  });
 
   const addProfile = useProfileStore((state) => state.addProfile);
   const profiles = useProfileStore((state) => state.profiles);
@@ -35,7 +30,7 @@ const NewProfileModal = ({
       alert("이름은 5글자 이하로 입력해주세요.");
       return;
     }
-    addProfile(profiles.length, profileImage ?? defaultImageFile, name);
+    addProfile(profiles.length, profileImage ?? null, name);
     console.log("profiles : ", profiles);
     handleClose();
   };
@@ -83,6 +78,7 @@ const NewProfileModal = ({
             />
           </div>
         </section>
+
         <div className="mt-4">
           <button
             onClick={handleAddUser}

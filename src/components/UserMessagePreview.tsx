@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import {
   useModifyMessageStore,
@@ -14,10 +14,12 @@ import { useNameStyleStore } from "../stores/modifyStyle/useNameStyleStore";
 import { useMessageStyleStore } from "../stores/modifyStyle/useMessageStyleStore";
 
 const UserMessagePreview = ({
+  profileImage,
   username,
   message,
   time,
 }: {
+  profileImage: File | null;
   username: string;
   message: string;
   time: string;
@@ -88,6 +90,10 @@ const UserMessagePreview = ({
     setIsModifyProfile(true);
   };
 
+  useEffect(() => {
+    console.log("profileImage : ", profileImage);
+  }, [profileImage]);
+
   return (
     <div className="flex text-sm">
       <div
@@ -104,7 +110,11 @@ const UserMessagePreview = ({
           }}
           width={width}
           height={height}
-          src="/images/default.png"
+          src={
+            typeof profileImage === "string"
+              ? profileImage
+              : "/images/default.png"
+          }
           alt="프로필"
         />
       </div>
