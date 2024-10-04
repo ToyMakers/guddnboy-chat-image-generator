@@ -6,12 +6,12 @@ import {
   useModifyTimeStore,
   useModifyBackgroundStore,
   useModifyProfileStore,
-} from "../store/useModifyBooleanStore";
+} from "../stores/useModifyBooleanStore";
 
-import { useTimeStyleStore } from "../store/modifyStyle/useTimeStyleStore";
-import { useProfileStyleStore } from "../store/modifyStyle/useProfileStyleStore";
-import { useNameStyleStore } from "../store/modifyStyle/useNameStyleStore";
-import { useMessageStyleStore } from "../store/modifyStyle/useMessageStyleStore";
+import { useTimeStyleStore } from "../stores/modifyStyle/useTimeStyleStore";
+import { useProfileStyleStore } from "../stores/modifyStyle/useProfileStyleStore";
+import { useNameStyleStore } from "../stores/modifyStyle/useNameStyleStore";
+import { useMessageStyleStore } from "../stores/modifyStyle/useMessageStyleStore";
 
 const UserMessagePreview = ({
   username,

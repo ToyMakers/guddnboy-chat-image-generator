@@ -6,10 +6,10 @@ import {
   useModifyNameStore,
   useModifyTimeStore,
   useModifyProfileStore,
-} from "../store/useModifyBooleanStore";
+} from "../stores/useModifyBooleanStore";
 import UserMessagePreview from "./UserMessagePreview";
-import { useProfileStore } from "../store/useProfileStore";
-import { useBackgroundStyleStore } from "../store/modifyStyle/useBackgroundStyleStore";
+import { useProfileStore } from "../stores/useProfileStore";
+import { useBackgroundStyleStore } from "../stores/modifyStyle/useBackgroundStyleStore";
 
 const ContentPreview = () => {
   const setIsModifyName = useModifyNameStore((state) => state.setIsModifyName);

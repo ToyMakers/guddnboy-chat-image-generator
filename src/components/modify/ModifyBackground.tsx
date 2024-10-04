@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useBackgroundStyleStore } from "../../store/modifyStyle/useBackgroundStyleStore";
+import { useBackgroundStyleStore } from "../../stores/modifyStyle/useBackgroundStyleStore";
 
 const ModifyBackgroundComponent = () => {
   const backgroundColor = useBackgroundStyleStore(

@@ -1,15 +1,10 @@
 "use client";
 
 import React, { Fragment, useEffect } from "react";
-import { useProfileStore } from "../../store/useProfileStore";
+import { useProfileStore } from "../../stores/useProfileStore";
 import UserForm from "../UserForm";
-import defaultImage from "../../../public/images/default.png";
 
 const AddMessageComponent = () => {
-  const defaultImageFile = new File([defaultImage.src], "default.png", {
-    type: "image/png",
-  });
-
   const profiles = useProfileStore((state) => state.profiles);
 
   const addProfile = useProfileStore((state) => state.addProfile);
@@ -19,7 +14,7 @@ const AddMessageComponent = () => {
   const addNewUserForm = () => {
     const defaultProfile = {
       id: profiles.length,
-      profileImage: defaultImageFile,
+      profileImage: new File([""], "default.png"),
       name: "고양이",
     };
 

@@ -1,9 +1,8 @@
 import { create } from "zustand";
-import defaultImage from "../../public/images/default.png";
 
 interface Profile {
   id: number;
-  profileImage: File | null | typeof defaultImage;
+  profileImage: File | null;
   name: string;
   message?: string;
   time?: string;

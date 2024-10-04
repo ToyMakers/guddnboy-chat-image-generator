@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useNameStyleStore } from "@/store/modifyStyle/useNameStyleStore";
+import { useNameStyleStore } from "@/stores/modifyStyle/useNameStyleStore";
 
 const ModifyNameComponent = () => {
   const {

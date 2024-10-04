@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useMessageStyleStore } from "@/store/modifyStyle/useMessageStyleStore";
+import { useMessageStyleStore } from "@/stores/modifyStyle/useMessageStyleStore";
 
 const ModifyMessageComponent = () => {
   const {

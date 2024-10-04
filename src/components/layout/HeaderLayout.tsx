@@ -8,7 +8,7 @@ import {
   useModifyTimeStore,
   useModifyBackgroundStore,
   useModifyProfileStore,
-} from "../../store/useModifyBooleanStore";
+} from "../../stores/useModifyBooleanStore";
 
 const HeaderLayout = ({ onCapture }: { onCapture: () => void }) => {
   const isModifyName = useModifyNameStore((state) => state.isModifyName);

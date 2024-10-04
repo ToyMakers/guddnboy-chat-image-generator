@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import NewProfileModal from "./modal/NewProfileModal";
-import { useProfileStore } from "../store/useProfileStore";
+import { useProfileStore } from "../stores/useProfileStore";
 
 const UserForm = ({
   onRemove,
