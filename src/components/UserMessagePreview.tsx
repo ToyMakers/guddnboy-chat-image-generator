@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import {
   useModifyMessageStore,
@@ -89,10 +89,6 @@ const UserMessagePreview = ({
     setIsModifyTime(false);
     setIsModifyProfile(true);
   };
-
-  useEffect(() => {
-    console.log("profileImage : ", profileImage);
-  }, [profileImage]);
 
   return (
     <div className="flex text-sm">
