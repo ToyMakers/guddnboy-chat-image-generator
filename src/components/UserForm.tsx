@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import NewProfileModal from "./Modal/NewProfileModal";
-import { useProfileStore } from "@/store/useProfileStore";
+import NewProfileModal from "./modal/NewProfileModal";
+import { useProfileStore } from "../store/useProfileStore";
 
 import AddUser from "../../public/images/addUser.png";
 import deleteImg from "../../public/images/delete.png";

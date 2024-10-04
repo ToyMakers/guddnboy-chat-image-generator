@@ -2,11 +2,13 @@
 
 import React, { Fragment } from "react";
 import Link from "next/link";
-import { useModifyNameStore } from "@/store/useModifyBooleanStore";
-import { useModifyMessageStore } from "@/store/useModifyBooleanStore";
-import { useModifyTimeStore } from "@/store/useModifyBooleanStore";
-import { useModifyBackgroundStore } from "@/store/useModifyBooleanStore";
-import { useModifyProfileStore } from "@/store/useModifyBooleanStore";
+import {
+  useModifyNameStore,
+  useModifyMessageStore,
+  useModifyTimeStore,
+  useModifyBackgroundStore,
+  useModifyProfileStore,
+} from "../../store/useModifyBooleanStore";
 
 const HeaderLayout = ({ onCapture }: { onCapture: () => void }) => {
   const isModifyName = useModifyNameStore((state) => state.isModifyName);

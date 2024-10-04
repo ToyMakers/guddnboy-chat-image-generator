@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useProfileStore } from "@/store/useProfileStore";
+import { useProfileStore } from "../../store/useProfileStore";
 import defaultImage from "../../../public/images/default.png";
 
 const NewProfileModal = ({

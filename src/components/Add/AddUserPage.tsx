@@ -1,17 +1,20 @@
 "use client";
 import React from "react";
-import AddMessageComponent from "./AddMessageComponent";
-import ModifyNameComponent from "../Modify/ModifyNameComponent";
-import { useModifyNameStore } from "@/store/useModifyBooleanStore";
-import { useModifyMessageStore } from "@/store/useModifyBooleanStore";
-import { useModifyTimeStore } from "@/store/useModifyBooleanStore";
-import { useModifyProfileStore } from "@/store/useModifyBooleanStore";
-import { useModifyBackgroundStore } from "@/store/useModifyBooleanStore";
+import AddMessageComponent from "./AddMessage";
+import ModifyNameComponent from "../modify/ModifyName";
 
-import ModifyChattingComponent from "../Modify/ModifyMessageComponent";
-import ModifyTimeComponent from "../Modify/ModifyTimeComponent";
-import ModifyBackgroundComponent from "../Modify/ModifyBackgroundComponent";
-import ModifyProfileComponent from "../Modify/ModifyProfileComponent";
+import ModifyChattingComponent from "../modify/ModifyMessage";
+import ModifyTimeComponent from "../modify/ModifyTime";
+import ModifyBackgroundComponent from "../modify/ModifyBackground";
+import ModifyProfileComponent from "../modify/ModifyProfile";
+
+import {
+  useModifyNameStore,
+  useModifyMessageStore,
+  useModifyTimeStore,
+  useModifyProfileStore,
+  useModifyBackgroundStore,
+} from "../../store/useModifyBooleanStore";
 
 const AddUserPage = () => {
   const isModifyName = useModifyNameStore((state) => state.isModifyName);
