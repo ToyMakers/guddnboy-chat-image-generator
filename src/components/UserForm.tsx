@@ -108,7 +108,7 @@ const UserForm = ({
                     <Image
                       width={20}
                       height={20}
-                      src="../images/addUser.png"
+                      src="/images/addUser.png"
                       alt="추가"
                     />
                   </button>
