@@ -3,7 +3,7 @@
 import React from "react";
 import { useBackgroundStyleStore } from "../../stores/modifyStyle/useBackgroundStyleStore";
 
-const ModifyBackgroundComponent = () => {
+const ModifyBackground = () => {
   const backgroundColor = useBackgroundStyleStore(
     (state) => state.backgroundColor
   );
@@ -66,4 +66,4 @@ const ModifyBackgroundComponent = () => {
   );
 };
 
-export default ModifyBackgroundComponent;
+export default ModifyBackground;

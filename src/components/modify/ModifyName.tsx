@@ -3,7 +3,7 @@
 import React from "react";
 import { useNameStyleStore } from "@/stores/modifyStyle/useNameStyleStore";
 
-const ModifyNameComponent = () => {
+const ModifyName = () => {
   const {
     fontweight_name,
     fontsize_name,
@@ -72,4 +72,4 @@ const ModifyNameComponent = () => {
   );
 };
 
-export default ModifyNameComponent;
+export default ModifyName;

@@ -3,7 +3,7 @@
 import React from "react";
 import { useProfileStyleStore } from "@/stores/modifyStyle/useProfileStyleStore";
 
-const ModifyProfileComponent = () => {
+const ModifyProfile = () => {
   const {
     width,
     height,
@@ -176,4 +176,4 @@ const ModifyProfileComponent = () => {
   );
 };
 
-export default ModifyProfileComponent;
+export default ModifyProfile;

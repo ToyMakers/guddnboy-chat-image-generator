@@ -1,7 +1,7 @@
 import React from "react";
 import { useTimeStyleStore } from "@/stores/modifyStyle/useTimeStyleStore";
 
-const ModifyTimeComponent = () => {
+const ModifyTime = () => {
   const { fontSize_time, textColor_time, setFontSize, setTextColor } =
     useTimeStyleStore();
 
@@ -47,4 +47,4 @@ const ModifyTimeComponent = () => {
   );
 };
 
-export default ModifyTimeComponent;
+export default ModifyTime;

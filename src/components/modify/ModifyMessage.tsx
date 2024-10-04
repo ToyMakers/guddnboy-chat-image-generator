@@ -3,7 +3,7 @@
 import React from "react";
 import { useMessageStyleStore } from "@/stores/modifyStyle/useMessageStyleStore";
 
-const ModifyMessageComponent = () => {
+const ModifyMessage = () => {
   const {
     fontSize_Message,
     fontWeight_Message,
@@ -120,4 +120,4 @@ const ModifyMessageComponent = () => {
   );
 };
 
-export default ModifyMessageComponent;
+export default ModifyMessage;
