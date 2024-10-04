@@ -4,7 +4,7 @@ import React, { Fragment, useEffect } from "react";
 import { useProfileStore } from "../../stores/useProfileStore";
 import UserForm from "../UserForm";
 
-const AddMessageComponent = () => {
+const AddMessage = () => {
   const profiles = useProfileStore((state) => state.profiles);
 
   const addProfile = useProfileStore((state) => state.addProfile);
@@ -79,4 +79,4 @@ const AddMessageComponent = () => {
   );
 };
 
-export default AddMessageComponent;
+export default AddMessage;
