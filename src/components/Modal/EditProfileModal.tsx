@@ -1,21 +1,26 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { useProfileStore } from "../../stores/useProfileStore";
+import { useProfileStore } from "@/stores/useProfileStore";
 
-const NewProfileModal = ({
+const EditProfileModal = ({
   title,
+  editProfileIndex,
+  profile,
   handleClose,
 }: {
   title: string;
+  editProfileIndex: number;
+  profile: { id: number; name: string; profileImage: File | null };
   handleClose: () => void;
 }) => {
-  const [name, setName] = useState("");
-  const [profileImage, setProfileImage] = useState<File | null>(null);
-  const [previewImage, setPreviewImage] = useState<string | null>(null);
-
-  const profiles = useProfileStore((state) => state.profiles);
-  const addProfile = useProfileStore((state) => state.addProfile);
+  const [name, setName] = useState(profile.name);
+  const [profileImage, setProfileImage] = useState<File | null>(
+    profile.profileImage
+  );
+  const [previewImage, setPreviewImage] = useState<string | null>(
+    profile.profileImage ? URL.createObjectURL(profile.profileImage) : null
+  );
 
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -23,7 +28,9 @@ const NewProfileModal = ({
     setPreviewImage(URL.createObjectURL(e.target.files[0]));
   };
 
-  const handleAddUser = () => {
+  const updateProfile = useProfileStore((state) => state.updateProfile);
+
+  const handleSave = () => {
     if (!name) {
       alert("이름을 입력해주세요.");
       return;
@@ -32,12 +39,10 @@ const NewProfileModal = ({
       alert("이름은 5글자 이하로 입력해주세요.");
       return;
     }
-    if (name in profiles) {
-      alert("이미 존재하는 이름입니다.");
-      return;
-    }
-    addProfile(profiles.length, profileImage ?? null, name);
-    console.log("profiles : ", profiles);
+
+    updateProfile(editProfileIndex, profileImage, name);
+    console.log("profile : ", profile);
+
     handleClose();
   };
 
@@ -85,9 +90,9 @@ const NewProfileModal = ({
 
         <div className="mt-4">
           <button
-            onClick={handleAddUser}
+            onClick={handleSave}
             className="px-4 py-2 bg-chatbg text-white rounded-md transition hover:bg-sky-700">
-            추가하기
+            저장하기
           </button>
         </div>
       </div>
@@ -95,4 +100,4 @@ const NewProfileModal = ({
   );
 };
 
-export default NewProfileModal;
+export default EditProfileModal;

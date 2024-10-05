@@ -14,7 +14,7 @@ const AddMessage = () => {
   const addNewUserForm = () => {
     const defaultProfile = {
       id: profiles.length,
-      profileImage: new File([""], "default.png"),
+      profileImage: null,
       name: "고양이",
     };
 
@@ -26,6 +26,7 @@ const AddMessage = () => {
 
     updateUserMessage(
       newMessage.id,
+      defaultProfile.profileImage,
       defaultProfile.name,
       newMessage.message,
       newMessage.time

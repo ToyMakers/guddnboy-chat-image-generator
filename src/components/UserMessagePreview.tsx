@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   useModifyMessageStore,
@@ -90,10 +90,25 @@ const UserMessagePreview = ({
     setIsModifyProfile(true);
   };
 
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+
+  const handlePreviewImage = (profileImage: File) => {
+    if (!profileImage) return;
+    setPreviewImage(URL.createObjectURL(profileImage));
+    console.log("previewImage : ", previewImage);
+  };
+
+  useEffect(() => {
+    if (!profileImage) return;
+
+    handlePreviewImage(profileImage);
+    console.log("profileImage : ", profileImage);
+  }, [profileImage]);
+
   return (
     <div className="flex text-sm">
       <div
-        className="relative flex justify-center items-center align-middle hover:cursor-pointer hover:border border-solid border-slate-500"
+        className="relative flex w-auto justify-center items-center align-middle hover:cursor-pointer hover:border border-solid border-slate-500"
         onClick={handleModifyProfile}>
         <Image
           style={{
@@ -106,11 +121,7 @@ const UserMessagePreview = ({
           }}
           width={width}
           height={height}
-          src={
-            typeof profileImage === "string"
-              ? profileImage
-              : "/images/default.png"
-          }
+          src={previewImage || "/images/default.png"}
           alt="프로필"
         />
       </div>
