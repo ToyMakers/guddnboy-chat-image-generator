@@ -32,6 +32,10 @@ const NewProfileModal = ({
       alert("이름은 5글자 이하로 입력해주세요.");
       return;
     }
+    if (name in profiles) {
+      alert("이미 존재하는 이름입니다.");
+      return;
+    }
     addProfile(profiles.length, profileImage ?? null, name);
     console.log("profiles : ", profiles);
     handleClose();
