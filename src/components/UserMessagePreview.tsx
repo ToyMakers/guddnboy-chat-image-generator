@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   useModifyMessageStore,
@@ -108,7 +108,7 @@ const UserMessagePreview = ({
   return (
     <div className="flex text-sm">
       <div
-        className="relative flex justify-center items-center align-middle hover:cursor-pointer hover:border border-solid border-slate-500"
+        className="relative flex w-auto justify-center items-center align-middle hover:cursor-pointer hover:border border-solid border-slate-500"
         onClick={handleModifyProfile}>
         <Image
           style={{
