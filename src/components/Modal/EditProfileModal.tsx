@@ -15,7 +15,6 @@ const EditProfileModal = ({
   handleClose: () => void;
 }) => {
   const [name, setName] = useState(profile.name);
-  const profiles = useProfileStore((state) => state.profiles);
   const [profileImage, setProfileImage] = useState<File | null>(
     profile.profileImage
   );
@@ -38,12 +37,6 @@ const EditProfileModal = ({
     }
     if (name.length > 5) {
       alert("이름은 5글자 이하로 입력해주세요.");
-      return;
-    }
-
-    const isNameExist = profiles.some((profile) => profile.name === name);
-    if (isNameExist) {
-      alert("이미 존재하는 이름입니다.");
       return;
     }
 
