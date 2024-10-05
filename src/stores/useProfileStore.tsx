@@ -16,6 +16,7 @@ interface ProfileStore {
   addProfile: (id: number, profileImage: File | null, name: string) => void;
   updateUserMessage: (
     id: number,
+    profileImage: File | null,
     name: string,
     message: string,
     time: string
@@ -36,13 +37,16 @@ export const useProfileStore = create<ProfileStore>((set) => ({
 
   updateUserMessage: (
     id: number,
+    profileImage: File | null,
     name: string,
     message: string,
     time: string
   ) => {
     set((state) => ({
       profiles: state.profiles.map((profile) =>
-        profile.id === id ? { ...profile, name, message, time } : profile
+        profile.id === id
+          ? { ...profile, profileImage, name, message, time }
+          : profile
       ),
     }));
   },
