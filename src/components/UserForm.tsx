@@ -22,6 +22,7 @@ const UserForm = ({
     const newTime = e.target.value;
     updateUserMessage(
       userIndex,
+      profiles[userIndex].profileImage,
       profiles[userIndex].name,
       profiles[userIndex].message ?? "",
       newTime
@@ -47,6 +48,7 @@ const UserForm = ({
 
     updateUserMessage(
       userIndex,
+      profiles[userIndex].profileImage,
       profiles[userIndex].name,
       message,
       profiles[userIndex].time ?? ""
@@ -66,6 +68,7 @@ const UserForm = ({
     getUserNames();
     updateUserMessage(
       userIndex,
+      profiles[userIndex].profileImage,
       profiles[userIndex].name,
       message,
       profiles[userIndex].time ?? ""
@@ -91,6 +94,7 @@ const UserForm = ({
                       onClick={() => {
                         updateUserMessage(
                           userIndex,
+                          profiles[userIndex].profileImage,
                           name,
                           `${profiles[userIndex].message}`,
                           `${profiles[userIndex].time}`
