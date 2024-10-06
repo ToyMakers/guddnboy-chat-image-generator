@@ -1,51 +1,39 @@
 "use client";
 
 import React, { Fragment, useEffect } from "react";
-import { useProfileStore } from "../../stores/useProfileStore";
 import UserForm from "../UserForm";
+import { useChatStore } from "../../stores/useChatStore";
 
 const AddMessage = () => {
-  const profiles = useProfileStore((state) => state.profiles);
+  const userForms = useChatStore((state) => state.userForms);
+  const profiles = useChatStore((state) => state.profiles);
 
-  const addProfile = useProfileStore((state) => state.addProfile);
-  const removeProfile = useProfileStore((state) => state.removeProfile);
-  const updateUserMessage = useProfileStore((state) => state.updateUserMessage);
-
+  const addUserForm = useChatStore((state) => state.addUserForm);
+  const removeUserForm = useChatStore((state) => state.removeUserForm);
   const addNewUserForm = () => {
-    const defaultProfile = {
-      id: profiles.length,
-      profileImage: null,
-      name: "고양이",
-    };
+    const defaultProfile = profiles[0];
 
-    const newMessage = {
-      id: profiles.length,
+    const defaultMessage = {
+      id: userForms.length,
       message: "",
       time: "",
     };
 
-    updateUserMessage(
-      newMessage.id,
-      defaultProfile.profileImage,
-      defaultProfile.name,
-      newMessage.message,
-      newMessage.time
-    );
-
-    addProfile(
-      defaultProfile.id,
-      defaultProfile.profileImage,
-      defaultProfile.name
-    );
-    console.log("profiles : ", profiles);
+    const newUserForm = {
+      id: userForms.length,
+      profile: defaultProfile,
+      message: defaultMessage,
+    };
+    addUserForm(newUserForm);
   };
 
   const deleteUserForm = (index: number) => {
-    removeProfile(index);
+    removeUserForm(index);
   };
 
   useEffect(() => {
     addNewUserForm;
+    console.log("userForms : ", userForms);
   }, []);
 
   return (
@@ -60,7 +48,7 @@ const AddMessage = () => {
           <div className="flex items-center size-12"></div>
         </section>
         <div className="w-full">
-          {profiles.map((_, index) => (
+          {userForms.map((_, index) => (
             <UserForm
               key={index}
               userIndex={index}

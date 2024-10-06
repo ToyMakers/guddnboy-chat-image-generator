@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import NewProfileModal from "./modal/NewProfileModal";
 import EditProfileModal from "./modal/EditProfileModal";
-import { useProfileStore } from "../stores/useProfileStore";
+import { useChatStore } from "../stores/useChatStore";
 
 const UserForm = ({
   onRemove,
@@ -16,22 +16,20 @@ const UserForm = ({
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editProfileIndex, setEditProfileIndex] = useState<number | null>(null);
   const [message, setMessage] = useState("");
-  const [userNames, setUserNames] = useState<string[]>([]);
-  // const [profileImage, setProfileImage] = useState<File | null>(null);
 
-  const profiles = useProfileStore((state) => state.profiles);
-  const updateUserMessage = useProfileStore((state) => state.updateUserMessage);
-  const updateProfile = useProfileStore((state) => state.updateProfile);
+  const userForms = useChatStore((state) => state.userForms);
+  const profiles = useChatStore((state) => state.profiles);
+  const updateMessage = useChatStore((state) => state.updateMessage);
+  const updateFormsProfile = useChatStore((state) => state.updateFormsProfile);
 
   const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTime = e.target.value;
-    updateUserMessage(
-      userIndex,
-      profiles[userIndex].profileImage,
-      profiles[userIndex].name,
-      profiles[userIndex].message ?? "",
-      newTime
-    );
+
+    updateMessage(userIndex, {
+      id: userIndex,
+      message: userForms[userIndex].message.message,
+      time: newTime,
+    });
   };
 
   const handleModalOpen = () => {
@@ -51,32 +49,20 @@ const UserForm = ({
     const newMessage = e.target.value;
     setMessage(newMessage);
 
-    updateUserMessage(
-      userIndex,
-      profiles[userIndex].profileImage,
-      profiles[userIndex].name,
-      message,
-      profiles[userIndex].time ?? ""
-    );
-
-    console.log("newMessage : ", newMessage);
+    updateMessage(userIndex, {
+      id: userIndex,
+      message: newMessage,
+      time: userForms[userIndex].message.time ?? "",
+    });
   };
 
   useEffect(() => {
-    console.log("profiles : ", profiles);
-    updateUserMessage(
-      userIndex,
-      profiles[userIndex].profileImage,
-      profiles[userIndex].name,
-      message,
-      profiles[userIndex].time ?? ""
-    );
-  }, [profiles[userIndex].name, profiles[userIndex].profileImage]);
-
-  useEffect(() => {
-    const names = Array.from(new Set(profiles.map((item) => item.name)));
-    setUserNames(names);
-  }, [profiles]);
+    updateMessage(userIndex, {
+      id: userIndex,
+      message: userForms[userIndex].message.message,
+      time: userForms[userIndex].message.time,
+    });
+  }, []);
 
   return (
     <section className="relative group w-full flex justify-around items-center mb-4 h-12 transition rounded-md bg-slate-100">
@@ -87,26 +73,19 @@ const UserForm = ({
               <button
                 onClick={handleDropdownToggle}
                 className="w-32 h-12 text-center rounded-md outline-none appearance-none hover:cursor-pointer">
-                {profiles[userIndex]?.name || "프로필 선택"}
+                {userForms[userIndex].profile.name}
               </button>
               {isDropdownOpen && (
                 <div className="absolute left-0 right-0 mt-1 bg-white border border-solid border-slate-300 rounded-md shadow-md z-10">
-                  {userNames.map((name, index) => (
+                  {profiles.map((profile, index) => (
                     <div key={index} className="flex">
                       <button
                         onClick={() => {
-                          updateUserMessage(
-                            userIndex,
-                            profiles[userIndex].profileImage,
-                            name,
-                            `${profiles[userIndex].message}`,
-                            `${profiles[userIndex].time}`
-                          ),
-                            updateProfile(
-                              userIndex,
-                              profiles[userIndex].profileImage,
-                              name
-                            );
+                          updateFormsProfile(userIndex, {
+                            id: profile.id,
+                            profileImage: profile.profileImage,
+                            name: profile.name,
+                          });
                           setIsDropdownOpen(false);
                         }}
                         className="flex items-center align-middle h-12  text-left px-2 py-1 hover:bg-gray-200 rounded-md transition">
@@ -125,7 +104,7 @@ const UserForm = ({
                             className="rounded-full mr-1"
                           />
                         </div>
-                        <div className="text-sm ml-1 w-14">{name}</div>
+                        <div className="text-sm ml-1 w-14">{profile.name}</div>
                       </button>
                       <button
                         onClick={() => {
@@ -169,7 +148,7 @@ const UserForm = ({
                   <EditProfileModal
                     title={"프로필 수정하기"}
                     editProfileIndex={editProfileIndex}
-                    profile={profiles[editProfileIndex]} // 수정할 프로필 정보 전달
+                    profile={userForms[editProfileIndex].profile}
                     handleClose={() => setIsEditOpen(false)}
                   />
                 </div>
@@ -182,7 +161,9 @@ const UserForm = ({
       <div className="w-auto">
         <input
           type="text"
-          placeholder={profiles[userIndex]?.message || "메세지를 입력하세요."}
+          placeholder={
+            userForms[userIndex].message.message || "메세지를 입력하세요."
+          }
           value={message}
           onChange={handleMessageChange}
           className="px-2 w-64 h-12 transition rounded-md bg-slate-100 outline-none hover:border border-solid border-slate-300"

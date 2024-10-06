@@ -8,8 +8,8 @@ import {
   useModifyProfileStore,
 } from "../stores/useModifyBooleanStore";
 import UserMessagePreview from "./UserMessagePreview";
-import { useProfileStore } from "../stores/useProfileStore";
 import { useBackgroundStyleStore } from "../stores/modifyStyle/useBackgroundStyleStore";
+import { useChatStore } from "../stores/useChatStore";
 
 const ContentPreview = () => {
   const setIsModifyName = useModifyNameStore((state) => state.setIsModifyName);
@@ -43,8 +43,7 @@ const ContentPreview = () => {
   );
 
   const userFormGap = useBackgroundStyleStore((state) => state.userFormGap);
-
-  const profiles = useProfileStore((state) => state.profiles);
+  const userForms = useChatStore((state) => state.userForms);
 
   return (
     <div
@@ -55,13 +54,13 @@ const ContentPreview = () => {
         padding: `${backgroundPadding}px`,
       }}>
       <div className="flex flex-col" style={{ gap: `${userFormGap}px` }}>
-        {profiles.map((profile, index) => (
+        {userForms.map((userForm, index) => (
           <div key={index} className="flex my-1 p-2 border-b border-gray-300">
             <UserMessagePreview
-              profileImage={profile.profileImage}
-              username={profile.name}
-              message={profile.message ?? ""}
-              time={profile.time ?? ""}
+              profileImage={userForm.profile.profileImage}
+              username={userForm.profile.name}
+              message={userForm.message.message}
+              time={userForm.message.time}
             />
           </div>
         ))}

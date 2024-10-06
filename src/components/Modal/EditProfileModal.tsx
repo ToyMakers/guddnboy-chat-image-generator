@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { useProfileStore } from "@/stores/useProfileStore";
+import { useChatStore } from "../../stores/useChatStore";
 
 const EditProfileModal = ({
   title,
@@ -27,8 +27,7 @@ const EditProfileModal = ({
     setProfileImage(e.target.files[0]);
     setPreviewImage(URL.createObjectURL(e.target.files[0]));
   };
-
-  const updateProfile = useProfileStore((state) => state.updateProfile);
+  const updateProfileOnly = useChatStore((state) => state.updateProfileOnly);
 
   const handleSave = () => {
     if (!name) {
@@ -40,11 +39,15 @@ const EditProfileModal = ({
       return;
     }
 
-    updateProfile(editProfileIndex, profileImage, name);
-    console.log("profile : ", profile);
+    updateProfileOnly(editProfileIndex, profileImage, name);
 
+    console.log("프로필 수정 저장 실행");
     handleClose();
   };
+
+  useEffect(() => {
+    console.log("profile : ", profile);
+  }, [profile]);
 
   return (
     <div className="flex fixed inset-0 z-0 bg-gray-700 bg-opacity-70 items-center justify-center">
