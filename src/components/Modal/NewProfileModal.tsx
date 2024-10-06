@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { useProfileStore } from "../../stores/useProfileStore";
+import { useChatStore } from "../../stores/useChatStore";
 
 const NewProfileModal = ({
   title,
@@ -14,8 +14,8 @@ const NewProfileModal = ({
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
-  const profiles = useProfileStore((state) => state.profiles);
-  const addProfile = useProfileStore((state) => state.addProfile);
+  const profiles = useChatStore((state) => state.profiles);
+  const addProfileOnly = useChatStore((state) => state.addProfileOnly);
 
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -23,7 +23,7 @@ const NewProfileModal = ({
     setPreviewImage(URL.createObjectURL(e.target.files[0]));
   };
 
-  const handleAddUser = () => {
+  const handleAddProfile = () => {
     if (!name) {
       alert("이름을 입력해주세요.");
       return;
@@ -32,11 +32,12 @@ const NewProfileModal = ({
       alert("이름은 5글자 이하로 입력해주세요.");
       return;
     }
-    if (name in profiles) {
+    if (name in profiles.map((profile) => profile.name)) {
       alert("이미 존재하는 이름입니다.");
       return;
     }
-    addProfile(profiles.length, profileImage ?? null, name);
+    addProfileOnly(profiles.length, profileImage ?? null, name);
+    console.log("handleAddProfile 실행 : ");
     console.log("profiles : ", profiles);
     handleClose();
   };
@@ -85,7 +86,7 @@ const NewProfileModal = ({
 
         <div className="mt-4">
           <button
-            onClick={handleAddUser}
+            onClick={handleAddProfile}
             className="px-4 py-2 bg-chatbg text-white rounded-md transition hover:bg-sky-700">
             추가하기
           </button>
