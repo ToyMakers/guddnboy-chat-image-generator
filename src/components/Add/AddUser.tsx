@@ -2,7 +2,6 @@
 import React from "react";
 import AddMessage from "./AddMessage";
 import ModifyName from "../modify/ModifyName";
-
 import ModifyChatting from "../modify/ModifyMessage";
 import ModifyTime from "../modify/ModifyTime";
 import ModifyBackground from "../modify/ModifyBackground";
