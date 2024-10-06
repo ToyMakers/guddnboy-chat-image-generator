@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { useProfileStore } from "./useProfileStore";
+import { useChatStore } from "./useChatStore";
 
 interface UserMessage {
   id: number;
@@ -33,8 +33,8 @@ export const usePreviewStore = create<UserMessageStore>((set) => ({
 
   addUserMessagePreview: (selectedIndex, name, message, time) =>
     set((state) => {
-      const { profiles } = useProfileStore.getState();
-      const selectedProfile = profiles.find(
+      const userForms = useChatStore.getState().userForms;
+      const selectedProfile = userForms.find(
         (profile) => profile.id === selectedIndex
       );
 
@@ -45,7 +45,7 @@ export const usePreviewStore = create<UserMessageStore>((set) => ({
           ...state.userMessagePreviews,
           {
             id: selectedIndex || 0,
-            name: selectedProfile.name,
+            name: selectedProfile.profile.name,
             message,
             time,
           },
@@ -55,19 +55,19 @@ export const usePreviewStore = create<UserMessageStore>((set) => ({
 
   updateMessagePreview: (selectedIndex, name, message, time) =>
     set((state) => {
-      const { profiles, selectedProfileId } = useProfileStore.getState();
-      const selectedProfile = profiles.find(
-        (profile) => profile.id === selectedProfileId
+      const userForms = useChatStore.getState().userForms;
+      const selectedProfile = userForms.find(
+        (profile) => profile.id === selectedIndex
       );
 
       if (!selectedProfile) return state;
 
       return {
         userMessagePreviews: state.userMessagePreviews.map((userMessage) =>
-          userMessage.id === selectedProfileId
+          userMessage.id === selectedIndex
             ? {
-                id: selectedProfileId,
-                name: selectedProfile.name,
+                id: selectedIndex,
+                name: selectedProfile.profile.name,
                 message,
                 time,
               }
