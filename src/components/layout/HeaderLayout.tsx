@@ -10,7 +10,13 @@ import {
   useModifyProfileStore,
 } from "../../stores/useModifyBooleanStore";
 
-const HeaderLayout = ({ onCapture }: { onCapture: () => void }) => {
+const HeaderLayout = ({
+  onCapture,
+  onCopyToClipboard,
+}: {
+  onCapture: () => void;
+  onCopyToClipboard: () => void;
+}) => {
   const isModifyName = useModifyNameStore((state) => state.isModifyName);
   const isModifyMessage = useModifyMessageStore(
     (state) => state.isModifyMessage
@@ -74,8 +80,9 @@ const HeaderLayout = ({ onCapture }: { onCapture: () => void }) => {
             </div>
           )}
 
-          <div>
+          <div className="flex gap-2">
             <button onClick={onCapture}>이미지로 저장하기</button>
+            <button onClick={onCopyToClipboard}>클립보드에 복사하기</button>
           </div>
         </div>
       </div>

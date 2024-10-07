@@ -27,9 +27,31 @@ export default function RootPage() {
     }
   };
 
+  const copyToClipboard = async () => {
+    if (contentPreviewRef.current) {
+      const canvas = await html2canvas(contentPreviewRef.current);
+      canvas.toBlob(async (blob) => {
+        if (blob) {
+          try {
+            await navigator.clipboard.write([
+              new ClipboardItem({ "image/png": blob }),
+            ]);
+            alert("이미지가 클립보드에 복사되었습니다.");
+          } catch (err) {
+            console.error("클립보드 복사 오류:", err);
+            alert("클립보드에 복사하는 데 실패했습니다.");
+          }
+        }
+      }, "image/png");
+    }
+  };
+
   return (
     <div>
-      <HeaderLayout onCapture={captureContentPreview} />
+      <HeaderLayout
+        onCapture={captureContentPreview}
+        onCopyToClipboard={copyToClipboard}
+      />
       <div className="flex justify-around text-center">
         <div
           className="flex flex-col bg-chatbg w-80 h-96 rounded-md"
