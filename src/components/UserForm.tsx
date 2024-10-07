@@ -114,7 +114,7 @@ const UserForm = ({
                                 ? URL.createObjectURL(
                                     profiles[index].profileImage
                                   )
-                                : "/images/default.png"
+                                : `${process.env.NODE_ENV === "production" ? "/chat-image-generator" : ""}/images/default.png`
                             }
                             alt="프로필"
                             className="rounded-full mr-1"
@@ -132,7 +132,7 @@ const UserForm = ({
                         <Image
                           width={20}
                           height={20}
-                          src="/images/update.png"
+                          src={`${process.env.NODE_ENV === "production" ? "/chat-image-generator" : ""}/images/update.png`}
                           alt="수정"
                         />
                       </button>
@@ -145,7 +145,7 @@ const UserForm = ({
                     <Image
                       width={20}
                       height={20}
-                      src="/images/addUser.png"
+                      src={`${process.env.NODE_ENV === "production" ? "/chat-image-generator" : ""}/images/addUser.png`}
                       alt="추가"
                     />
                   </button>
