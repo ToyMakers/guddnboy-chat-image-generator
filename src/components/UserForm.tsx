@@ -76,7 +76,7 @@ const UserForm = ({
           onClick={handleToggle}
           className={`w-12 h-10 rounded-md transition ${
             userForms[userIndex].isToggle
-              ? "bg-mychatbg text-white font-bold text-sm"
+              ? "bg-mychatbg text-gray-500 font-bold text-sm"
               : "bg-chatbg text-white font-bold text-sm"
           }`}>
           {userForms[userIndex].isToggle ? "본인" : "상대방"}
