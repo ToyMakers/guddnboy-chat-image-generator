@@ -3,6 +3,7 @@
 const nextConfig = {
   images: {
     domains: ["api.dicebear.com"],
+    unoptimized: true,
   },
 
   assetPrefix:
