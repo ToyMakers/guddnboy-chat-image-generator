@@ -55,12 +55,17 @@ const ContentPreview = () => {
       }}>
       <div className="flex flex-col" style={{ gap: `${userFormGap}px` }}>
         {userForms.map((userForm, index) => (
-          <div key={index} className="flex my-1 p-2 border-b border-gray-300">
+          <div
+            key={index}
+            className={`flex my-1 p-2 border-b border-gray-300 ${
+              userForm.isToggle ? "justify-end" : ""
+            }`}>
             <UserMessagePreview
               profileImage={userForm.profile.profileImage}
               username={userForm.profile.name}
               message={userForm.message.message}
               time={userForm.message.time}
+              isToggle={userForm.isToggle}
             />
           </div>
         ))}
