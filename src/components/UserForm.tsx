@@ -21,6 +21,7 @@ const UserForm = ({
   const profiles = useChatStore((state) => state.profiles);
   const updateMessage = useChatStore((state) => state.updateMessage);
   const updateFormsProfile = useChatStore((state) => state.updateFormsProfile);
+  const setIsToggle = useChatStore((state) => state.setIsToggle);
 
   const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTime = e.target.value;
@@ -45,6 +46,10 @@ const UserForm = ({
     setIsDropdownOpen((prev) => !prev);
   };
 
+  const handleToggle = () => {
+    setIsToggle(userIndex, !userForms[userIndex].isToggle);
+  };
+
   const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newMessage = e.target.value;
     setMessage(newMessage);
@@ -66,6 +71,17 @@ const UserForm = ({
 
   return (
     <section className="relative group w-full flex justify-around items-center mb-4 h-12 transition rounded-md bg-slate-100">
+      <div>
+        <button
+          onClick={handleToggle}
+          className={`w-12 h-10 rounded-md transition ${
+            userForms[userIndex].isToggle
+              ? "bg-mychatbg text-gray-500 font-bold text-sm"
+              : "bg-chatbg text-white font-bold text-sm"
+          }`}>
+          {userForms[userIndex].isToggle ? "본인" : "상대방"}
+        </button>
+      </div>
       <div className="flex w-auto hover:border border-solid rounded-md border-slate-300">
         <div className="flex items-center w-32 h-11">
           <section className="flex items-center justify-between h-auto ">

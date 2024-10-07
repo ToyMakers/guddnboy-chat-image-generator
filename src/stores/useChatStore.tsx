@@ -14,6 +14,7 @@ interface UserForm {
   id: number;
   profile: Profile;
   message: Message;
+  isToggle: boolean;
 }
 
 import { create } from "zustand";
@@ -31,6 +32,7 @@ interface ChatState {
   ) => void;
   updateMessage: (id: number, message: Message) => void;
   removeUserForm: (id: number) => void;
+  setIsToggle: (id: number, isToggle: boolean) => void;
 }
 
 export const useChatStore = create<ChatState>((set) => ({
@@ -79,5 +81,12 @@ export const useChatStore = create<ChatState>((set) => ({
   removeUserForm: (id: number) =>
     set((state) => ({
       userForms: state.userForms.filter((userform) => userform.id !== id),
+    })),
+
+  setIsToggle: (id: number, isToggle: boolean) =>
+    set((state) => ({
+      userForms: state.userForms.map((userform) =>
+        userform.id === id ? { ...userform, isToggle } : userform
+      ),
     })),
 }));

@@ -23,6 +23,7 @@ const AddMessage = () => {
       id: userForms.length,
       profile: defaultProfile,
       message: defaultMessage,
+      isToggle: false,
     };
     addUserForm(newUserForm);
   };
@@ -33,7 +34,6 @@ const AddMessage = () => {
 
   useEffect(() => {
     addNewUserForm;
-    console.log("userForms : ", userForms);
   }, []);
 
   return (
