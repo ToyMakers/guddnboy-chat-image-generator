@@ -5,9 +5,11 @@ const nextConfig = {
     domains: ["api.dicebear.com"],
   },
 
-  output: "export",
+  assetPrefix:
+    process.env.NODE_ENV === "production"
+      ? "https://github.com/guddnboy/chat-image-generator/"
+      : "",
 
-  basePath:
-    process.env.NODE_ENV === "production" ? "/chat-image-generator" : "",
+  output: "export",
 };
 module.exports = nextConfig;
