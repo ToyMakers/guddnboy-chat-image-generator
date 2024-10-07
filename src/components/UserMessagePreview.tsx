@@ -114,7 +114,7 @@ const UserMessagePreview = ({
               src={
                 profileImage
                   ? URL.createObjectURL(profileImage)
-                  : "/images/default.png"
+                  : `${process.env.NODE_ENV === "production" ? "/chat-image-generator" : ""}/images/default.png`
               }
               alt="프로필"
             />

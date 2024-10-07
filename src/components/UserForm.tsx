@@ -197,7 +197,7 @@ const UserForm = ({
           <Image
             width={20}
             height={20}
-            src="/images/delete.png"
+            src={`${process.env.NODE_ENV === "production" ? "/chat-image-generator" : ""}/images/delete.png`}
             alt="삭제"
             className="hover:cursor-pointer"
           />
