@@ -5,7 +5,6 @@ interface Profile {
 }
 
 interface Message {
-  id: number;
   message: string;
   time: string;
 }
@@ -22,6 +21,7 @@ import { create } from "zustand";
 interface ChatState {
   userForms: UserForm[];
   profiles: Profile[];
+
   addUserForm: (userForm: UserForm) => void;
   addProfileOnly: (id: number, profileImage: File | null, name: string) => void;
   updateFormsProfile: (id: number, profile: Profile) => void;

@@ -27,7 +27,6 @@ const UserForm = ({
     const newTime = e.target.value;
 
     updateMessage(userIndex, {
-      id: userIndex,
       message: userForms[userIndex].message.message,
       time: newTime,
     });
@@ -55,7 +54,6 @@ const UserForm = ({
     setMessage(newMessage);
 
     updateMessage(userIndex, {
-      id: userIndex,
       message: newMessage,
       time: userForms[userIndex].message.time ?? "",
     });
@@ -63,7 +61,6 @@ const UserForm = ({
 
   useEffect(() => {
     updateMessage(userIndex, {
-      id: userIndex,
       message: userForms[userIndex].message.message,
       time: userForms[userIndex].message.time,
     });
@@ -114,7 +111,11 @@ const UserForm = ({
                                 ? URL.createObjectURL(
                                     profiles[index].profileImage
                                   )
-                                : `${process.env.NODE_ENV === "production" ? "/chat-image-generator" : ""}/images/default.png`
+                                : `${
+                                    process.env.NODE_ENV === "production"
+                                      ? "/chat-image-generator"
+                                      : ""
+                                  }/images/default.png`
                             }
                             alt="프로필"
                             className="rounded-full mr-1"
@@ -132,7 +133,11 @@ const UserForm = ({
                         <Image
                           width={20}
                           height={20}
-                          src={`${process.env.NODE_ENV === "production" ? "/chat-image-generator" : ""}/images/update.png`}
+                          src={`${
+                            process.env.NODE_ENV === "production"
+                              ? "/chat-image-generator"
+                              : ""
+                          }/images/update.png`}
                           alt="수정"
                         />
                       </button>
@@ -140,19 +145,24 @@ const UserForm = ({
                   ))}
                   <button
                     onClick={handleModalOpen}
-                    className="flex justify-between w-full h-12 text-left items-center px-2 py-1 hover:bg-gray-200 rounded-md">
+                    className="z-0 flex justify-between w-full h-12 text-left items-center px-2 py-1 hover:bg-gray-200 rounded-md">
                     추가
                     <Image
                       width={20}
                       height={20}
-                      src={`${process.env.NODE_ENV === "production" ? "/chat-image-generator" : ""}/images/addUser.png`}
+                      src={`${
+                        process.env.NODE_ENV === "production"
+                          ? "/chat-image-generator"
+                          : ""
+                      }/images/addUser.png`}
                       alt="추가"
                     />
                   </button>
                 </div>
               )}
+              {/* 모달의 z-index를 높여 다른 요소 위에 표시되도록 설정 */}
               {isOpen && (
-                <div className="w-full h-full fixed">
+                <div className="w-full h-full fixed z-50">
                   <NewProfileModal
                     title={"새 사용자 추가하기"}
                     handleClose={handleModalClose}
@@ -160,7 +170,7 @@ const UserForm = ({
                 </div>
               )}
               {isEditOpen && editProfileIndex !== null && (
-                <div className="w-full h-full fixed">
+                <div className="w-full h-full fixed z-50">
                   <EditProfileModal
                     title={"프로필 수정하기"}
                     editProfileIndex={editProfileIndex}
@@ -197,7 +207,11 @@ const UserForm = ({
           <Image
             width={20}
             height={20}
-            src={`${process.env.NODE_ENV === "production" ? "/chat-image-generator" : ""}/images/delete.png`}
+            src={`${
+              process.env.NODE_ENV === "production"
+                ? "/chat-image-generator"
+                : ""
+            }/images/delete.png`}
             alt="삭제"
             className="hover:cursor-pointer"
           />
