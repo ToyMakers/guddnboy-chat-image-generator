@@ -6,9 +6,12 @@ import ContentPreview from "../components/ContentPreview";
 import HeaderLayout from "../components/layout/HeaderLayout";
 import AddUser from "../components/add/AddUser";
 import { cardio } from "ldrs";
-cardio.register();
 
 export default function RootPage() {
+  if (typeof window !== "undefined" && typeof HTMLElement !== "undefined") {
+    cardio.register();
+  }
+
   const contentPreviewRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(false);
 
