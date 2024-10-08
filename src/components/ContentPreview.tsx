@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   useModifyBackgroundStore,
   useModifyMessageStore,
@@ -45,6 +45,10 @@ const ContentPreview = () => {
   const userFormGap = useBackgroundStyleStore((state) => state.userFormGap);
   const userForms = useChatStore((state) => state.userForms);
 
+  useEffect(() => {
+    console.log("userForms:", userForms);
+  }, [userForms]);
+
   return (
     <div
       className="w-80 h-96 border border-solid rounded-md border-slate-400 overflow-y-scroll hover:border hover:border-gray-500"
@@ -54,9 +58,9 @@ const ContentPreview = () => {
         padding: `${backgroundPadding}px`,
       }}>
       <div className="flex flex-col" style={{ gap: `${userFormGap}px` }}>
-        {userForms.map((userForm, index) => (
+        {userForms.map((userForm) => (
           <div
-            key={index}
+            key={userForm.id}
             className={`flex my-1 p-2 border-b border-gray-300 ${
               userForm.isToggle ? "justify-end" : ""
             }`}>
@@ -67,6 +71,8 @@ const ContentPreview = () => {
               time={userForm.message.time}
               isToggle={userForm.isToggle}
             />
+            {/* {`userForm.id : ${userForm.id}\n`} */}
+            {/* {`index : ${index}`} */}
           </div>
         ))}
       </div>

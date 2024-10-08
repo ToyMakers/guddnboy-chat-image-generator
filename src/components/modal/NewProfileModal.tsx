@@ -92,7 +92,7 @@ const NewProfileModal = ({
   }, []);
 
   return (
-    <div className="flex fixed inset-0 z-0 bg-gray-700 bg-opacity-70 items-center justify-center">
+    <div className="flex fixed inset-0 z-50 bg-gray-700 bg-opacity-70 items-center justify-center">
       <div className="bg-white p-6 rounded-md">
         <div className="w-full flex justify-end size-10 text-xl">
           <button onClick={handleClose} className="size-10">
