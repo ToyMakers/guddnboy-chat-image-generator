@@ -15,7 +15,10 @@ interface MessageStyle {
   setFontPadding: (fontPadding_Message: number) => void;
   setFontColor: (fontColor_Message: string) => void;
   setBorderRounded: (borderRounded_Message: number) => void;
-  setBackgroundColor: (backgroundcolor_Message: string) => void;
+  setBackgroundColor: (
+    backgroundcolor_Message: string,
+    backgroundColor_MyMessage: string
+  ) => void;
   setWidth: (width_Message: number) => void;
 }
 
@@ -38,6 +41,9 @@ export const useMessageStyleStore = create<MessageStyle>((set) => ({
   setBorderRounded: (borderRounded_Message) =>
     set({ borderRounded_Message: borderRounded_Message }),
   setBackgroundColor: (backgroundcolor_Message) =>
-    set({ backgroundcolor_Message: backgroundcolor_Message }),
+    set({
+      backgroundcolor_Message: backgroundcolor_Message,
+      backgroundColor_MyMessage: backgroundcolor_Message,
+    }),
   setWidth: (width) => set({ width_Message: width }),
 }));

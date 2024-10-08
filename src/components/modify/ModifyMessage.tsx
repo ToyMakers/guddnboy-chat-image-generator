@@ -97,6 +97,7 @@ const ModifyMessage = () => {
             onChange={(e) => {
               useMessageStyleStore.setState({
                 backgroundcolor_Message: e.target.value,
+                backgroundColor_MyMessage: e.target.value,
               });
             }}
           />
