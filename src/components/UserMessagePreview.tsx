@@ -12,20 +12,9 @@ import { useTimeStyleStore } from "../stores/modifyStyle/useTimeStyleStore";
 import { useProfileStyleStore } from "../stores/modifyStyle/useProfileStyleStore";
 import { useNameStyleStore } from "../stores/modifyStyle/useNameStyleStore";
 import { useMessageStyleStore } from "../stores/modifyStyle/useMessageStyleStore";
+import { useChatStore } from "../stores/useChatStore";
 
-const UserMessagePreview = ({
-  profileImage,
-  username,
-  message,
-  time,
-  isToggle,
-}: {
-  profileImage: File | null;
-  username: string;
-  message: string;
-  time: string;
-  isToggle: boolean;
-}) => {
+const UserMessagePreview = ({ userIndex }: { userIndex: number }) => {
   const setIsModifyName = useModifyNameStore((state) => state.setIsModifyName);
   const setIsModifyMessage = useModifyMessageStore(
     (state) => state.setIsModifyMessage
@@ -93,9 +82,10 @@ const UserMessagePreview = ({
     setIsModifyProfile(true);
   };
 
+  const userForms = useChatStore((state) => state.userForms);
   return (
     <div className="flex text-sm">
-      {!isToggle ? (
+      {!userForms[userIndex].isToggle ? (
         <>
           <div
             className="relative flex justify-center items-center align-middle hover:cursor-pointer hover:border border-solid border-slate-500"
@@ -112,8 +102,10 @@ const UserMessagePreview = ({
               width={width}
               height={height}
               src={
-                profileImage
-                  ? URL.createObjectURL(profileImage)
+                userForms[userIndex].profile.profileImage
+                  ? URL.createObjectURL(
+                      userForms[userIndex].profile.profileImage
+                    )
                   : `${
                       process.env.NODE_ENV === "production"
                         ? "/chat-image-generator"
@@ -131,7 +123,7 @@ const UserMessagePreview = ({
               fontWeight: fontweight_name,
               color: color_name,
             }}>
-            {username}
+            {userForms[userIndex].profile.name}
           </div>
           <div
             className="flex items-center w-auto h-auto px-2 m-1 bg-yourchatbg text-sm rounded-md hover:cursor-pointer hover:border border-solid border-slate-500"
@@ -145,13 +137,13 @@ const UserMessagePreview = ({
               backgroundColor: backgroundcolor_Message,
               width: width_Message,
             }}>
-            {message}
+            {userForms[userIndex].message.message}
           </div>
           <div
             className="flex items-end hover:cursor-pointer hover:border border-solid border-slate-500"
             onClick={handleModifyTime}
             style={{ fontSize: fontSize_time, color: textColor_time }}>
-            {time}
+            {userForms[userIndex].message.time}
           </div>
         </>
       ) : (
@@ -160,7 +152,7 @@ const UserMessagePreview = ({
             className="flex items-end hover:cursor-pointer hover:border border-solid border-slate-500"
             onClick={handleModifyTime}
             style={{ fontSize: fontSize_time, color: textColor_time }}>
-            {time}
+            {userForms[userIndex].message.time}
           </div>
           <div
             className="flex items-center w-auto h-10 px-2 m-1 text-sm rounded-md hover:cursor-pointer hover:border border-solid border-slate-500"
@@ -174,7 +166,7 @@ const UserMessagePreview = ({
               backgroundColor: backgroundColor_MyMessage,
               width: width_Message,
             }}>
-            {message}
+            {userForms[userIndex].message.message}
           </div>
         </>
       )}
