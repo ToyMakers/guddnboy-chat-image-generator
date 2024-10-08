@@ -26,7 +26,7 @@ const UserForm = ({
   const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTime = e.target.value;
 
-    updateMessage(userIndex, {
+    updateMessage(userForms[userIndex].id, {
       message: userForms[userIndex].message.message,
       time: newTime,
     });
@@ -46,21 +46,21 @@ const UserForm = ({
   };
 
   const handleToggle = () => {
-    setIsToggle(userIndex, !userForms[userIndex].isToggle);
+    setIsToggle(userForms[userIndex].id, !userForms[userIndex].isToggle);
   };
 
   const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newMessage = e.target.value;
     setMessage(newMessage);
 
-    updateMessage(userIndex, {
+    updateMessage(userForms[userIndex].id, {
       message: newMessage,
       time: userForms[userIndex].message.time ?? "",
     });
   };
 
   useEffect(() => {
-    updateMessage(userIndex, {
+    updateMessage(userForms[userIndex].id, {
       message: userForms[userIndex].message.message,
       time: userForms[userIndex].message.time,
     });
@@ -160,7 +160,6 @@ const UserForm = ({
                   </button>
                 </div>
               )}
-              {/* 모달의 z-index를 높여 다른 요소 위에 표시되도록 설정 */}
               {isOpen && (
                 <div className="w-full h-full fixed z-50">
                   <NewProfileModal

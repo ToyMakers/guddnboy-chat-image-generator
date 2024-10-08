@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment, useEffect, useRef } from "react";
+import React, { Fragment, useRef } from "react";
 import UserForm from "../UserForm";
 import { useChatStore } from "../../stores/useChatStore";
 
@@ -16,7 +16,6 @@ const AddMessage = () => {
     const defaultProfile = profiles[0];
 
     const defaultMessage = {
-      id: idCounter.current,
       message: "",
       time: "",
     };
@@ -35,10 +34,6 @@ const AddMessage = () => {
   const deleteUserForm = (id: number) => {
     removeUserForm(id);
   };
-
-  useEffect(() => {
-    console.log("메세지 추가 됨");
-  });
 
   return (
     <Fragment>
