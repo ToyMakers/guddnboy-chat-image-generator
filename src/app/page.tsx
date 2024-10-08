@@ -10,7 +10,7 @@ cardio.register();
 
 export default function RootPage() {
   const contentPreviewRef = useRef<HTMLDivElement>(null);
-  const [loading, setLoading] = useState(false); // 로딩 상태 관리
+  const [loading, setLoading] = useState(false);
 
   const captureContentPreview = async () => {
     if (contentPreviewRef.current) {
