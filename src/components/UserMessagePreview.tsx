@@ -114,7 +114,11 @@ const UserMessagePreview = ({
               src={
                 profileImage
                   ? URL.createObjectURL(profileImage)
-                  : `${process.env.NODE_ENV === "production" ? "/chat-image-generator" : ""}/images/default.png`
+                  : `${
+                      process.env.NODE_ENV === "production"
+                        ? "/chat-image-generator"
+                        : ""
+                    }/images/default.png`
               }
               alt="프로필"
             />
@@ -153,6 +157,12 @@ const UserMessagePreview = ({
       ) : (
         <>
           <div
+            className="flex items-end hover:cursor-pointer hover:border border-solid border-slate-500"
+            onClick={handleModifyTime}
+            style={{ fontSize: fontSize_time, color: textColor_time }}>
+            {time}
+          </div>
+          <div
             className="flex items-center w-auto h-10 px-2 m-1 text-sm rounded-md hover:cursor-pointer hover:border border-solid border-slate-500"
             onClick={handleModifyMessage}
             style={{
@@ -165,12 +175,6 @@ const UserMessagePreview = ({
               width: width_Message,
             }}>
             {message}
-          </div>
-          <div
-            className="flex items-end hover:cursor-pointer hover:border border-solid border-slate-500"
-            onClick={handleModifyTime}
-            style={{ fontSize: fontSize_time, color: textColor_time }}>
-            {time}
           </div>
         </>
       )}
