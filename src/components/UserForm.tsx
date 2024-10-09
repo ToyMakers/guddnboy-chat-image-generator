@@ -111,11 +111,7 @@ const UserForm = ({
                                 ? URL.createObjectURL(
                                     profiles[index].profileImage
                                   )
-                                : `${
-                                    process.env.NODE_ENV === "production"
-                                      ? "/chat-image-generator"
-                                      : ""
-                                  }/images/default.png`
+                                : "/images/default.png"
                             }
                             alt="프로필"
                             className="rounded-full mr-1"
@@ -133,11 +129,7 @@ const UserForm = ({
                         <Image
                           width={20}
                           height={20}
-                          src={`${
-                            process.env.NODE_ENV === "production"
-                              ? "/chat-image-generator"
-                              : ""
-                          }/images/update.png`}
+                          src="/images/update.png"
                           alt="수정"
                         />
                       </button>
@@ -150,11 +142,7 @@ const UserForm = ({
                     <Image
                       width={20}
                       height={20}
-                      src={`${
-                        process.env.NODE_ENV === "production"
-                          ? "/chat-image-generator"
-                          : ""
-                      }/images/addUser.png`}
+                      src="/images/addUser.png"
                       alt="추가"
                     />
                   </button>
@@ -206,11 +194,7 @@ const UserForm = ({
           <Image
             width={20}
             height={20}
-            src={`${
-              process.env.NODE_ENV === "production"
-                ? "/chat-image-generator"
-                : ""
-            }/images/delete.png`}
+            src="/images/delete.png"
             alt="삭제"
             className="hover:cursor-pointer"
           />

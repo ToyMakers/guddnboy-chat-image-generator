@@ -106,11 +106,7 @@ const UserMessagePreview = ({ userIndex }: { userIndex: number }) => {
                   ? URL.createObjectURL(
                       userForms[userIndex].profile.profileImage
                     )
-                  : `${
-                      process.env.NODE_ENV === "production"
-                        ? "/chat-image-generator"
-                        : ""
-                    }/images/default.png`
+                  : "/images/default.png"
               }
               alt="프로필"
             />
