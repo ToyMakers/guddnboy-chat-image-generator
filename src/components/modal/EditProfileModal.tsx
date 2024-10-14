@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { useChatStore } from "../../stores/useChatStore";
 
@@ -14,6 +14,7 @@ const EditProfileModal = ({
   profile: { id: number; name: string; profileImage: File | null };
   handleClose: () => void;
 }) => {
+  const profiles = useChatStore((state) => state.profiles);
   const [name, setName] = useState(profile.name);
   const [profileImage, setProfileImage] = useState<File | null>(
     profile.profileImage
@@ -28,6 +29,7 @@ const EditProfileModal = ({
     setPreviewImage(URL.createObjectURL(e.target.files[0]));
   };
   const updateProfileOnly = useChatStore((state) => state.updateProfileOnly);
+  const deleteProfile = useChatStore((state) => state.deleteProfile);
 
   const handleSave = () => {
     if (!name) {
@@ -45,9 +47,17 @@ const EditProfileModal = ({
     handleClose();
   };
 
-  useEffect(() => {
-    console.log("profile : ", profile);
-  }, [profile]);
+  const handleDeleteProfile = () => {
+    if (profiles.length === 1) {
+      alert("프로필은 최소 1개 이상이어야 합니다.");
+      return;
+    } else {
+      if (confirm("해당 프로필을 삭제하시겠습니까?")) {
+        deleteProfile(editProfileIndex);
+      }
+      handleClose();
+    }
+  };
 
   return (
     <div className="flex fixed inset-0 z-0 bg-gray-700 bg-opacity-70 items-center justify-center">
@@ -94,8 +104,13 @@ const EditProfileModal = ({
         <div className="mt-4">
           <button
             onClick={handleSave}
-            className="px-4 py-2 bg-chatbg text-white rounded-md transition hover:bg-sky-700">
+            className="px-4 py-2 mr-4 bg-chatbg text-white rounded-md transition hover:bg-sky-700">
             저장하기
+          </button>
+          <button
+            onClick={handleDeleteProfile}
+            className="px-4 py-2 ml-4 bg-chatbg text-white rounded-md transition hover:bg-sky-700">
+            삭제하기
           </button>
         </div>
       </div>

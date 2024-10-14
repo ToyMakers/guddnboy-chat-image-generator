@@ -29,6 +29,7 @@ interface ChatState {
     name: string,
     isToggle: boolean
   ) => void;
+  deleteProfile: (id: number) => void;
   updateFormsProfile: (id: number, profile: Profile) => void;
   updateProfileOnly: (
     id: number,
@@ -48,7 +49,6 @@ export const useChatStore = create<ChatState>((set) => ({
     set((state) => ({
       userForms: [...state.userForms, userForm],
     })),
-
   addProfileOnly: (
     id: number,
     profileImage: File | null,
@@ -58,7 +58,10 @@ export const useChatStore = create<ChatState>((set) => ({
     set((state) => ({
       profiles: [...state.profiles, { id, profileImage, name, isToggle }],
     })),
-
+  deleteProfile: (id: number) =>
+    set((state) => ({
+      profiles: state.profiles.filter((profile) => profile.id !== id),
+    })),
   updateFormsProfile: (id: number, profile: Profile) =>
     set((state) => ({
       userForms: state.userForms.map((userform) =>

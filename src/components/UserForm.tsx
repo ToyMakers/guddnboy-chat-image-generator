@@ -67,7 +67,13 @@ const UserForm = ({
       message: userForms[userIndex].message.message,
       time: userForms[userIndex].message.time,
     });
-  }, []);
+    updateFormsProfile(userIndex, {
+      id: userForms[userIndex].profile.id,
+      profileImage: userForms[userIndex].profile.profileImage,
+      name: userForms[userIndex].profile.name,
+      isToggle: userForms[userIndex].profile.isToggle,
+    });
+  }, [profiles]);
 
   return (
     <section className="relative group w-full flex justify-around items-center mb-4 h-12 transition rounded-md bg-slate-100">
