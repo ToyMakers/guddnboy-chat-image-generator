@@ -61,7 +61,7 @@ const NewProfileModal = ({
       alert("이미 존재하는 이름입니다.");
       return;
     }
-    addProfileOnly(profiles.length, profileImage ?? null, name);
+    addProfileOnly(profiles.length, profileImage ?? null, name, false);
     console.log("handleAddProfile 실행 : ");
     console.log("profiles : ", profiles);
     handleClose();

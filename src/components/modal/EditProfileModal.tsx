@@ -39,7 +39,7 @@ const EditProfileModal = ({
       return;
     }
 
-    updateProfileOnly(editProfileIndex, profileImage, name);
+    updateProfileOnly(editProfileIndex, profileImage, name, false);
 
     console.log("프로필 수정 저장 실행");
     handleClose();
