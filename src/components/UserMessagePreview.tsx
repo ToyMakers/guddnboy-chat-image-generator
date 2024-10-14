@@ -85,7 +85,7 @@ const UserMessagePreview = ({ userIndex }: { userIndex: number }) => {
   const userForms = useChatStore((state) => state.userForms);
   return (
     <div className="flex text-sm">
-      {!userForms[userIndex].isToggle ? (
+      {!userForms[userIndex].profile.isToggle ? (
         <>
           <div
             className="relative flex justify-center items-center align-middle hover:cursor-pointer hover:border border-solid border-slate-500"

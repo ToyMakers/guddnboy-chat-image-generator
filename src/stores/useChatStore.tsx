@@ -2,6 +2,7 @@ interface Profile {
   id: number;
   profileImage: File | null;
   name: string;
+  isToggle: boolean;
 }
 
 interface Message {
@@ -13,7 +14,6 @@ interface UserForm {
   id: number;
   profile: Profile;
   message: Message;
-  isToggle: boolean;
 }
 
 import { create } from "zustand";
@@ -23,29 +23,40 @@ interface ChatState {
   profiles: Profile[];
 
   addUserForm: (userForm: UserForm) => void;
-  addProfileOnly: (id: number, profileImage: File | null, name: string) => void;
+  addProfileOnly: (
+    id: number,
+    profileImage: File | null,
+    name: string,
+    isToggle: boolean
+  ) => void;
   updateFormsProfile: (id: number, profile: Profile) => void;
   updateProfileOnly: (
     id: number,
     profileImage: File | null,
-    name: string
+    name: string,
+    isToggle: boolean
   ) => void;
   updateMessage: (id: number, message: Message) => void;
   removeUserForm: (id: number) => void;
-  setIsToggle: (id: number, isToggle: boolean) => void;
+  setIsToggle: (profileId: number, isToggle: boolean) => void;
 }
 
 export const useChatStore = create<ChatState>((set) => ({
   userForms: [],
-  profiles: [{ id: 0, profileImage: null, name: "철수" }],
+  profiles: [{ id: 0, profileImage: null, name: "철수", isToggle: false }],
   addUserForm: (userForm: UserForm) =>
     set((state) => ({
       userForms: [...state.userForms, userForm],
     })),
 
-  addProfileOnly: (id: number, profileImage: File | null, name: string) =>
+  addProfileOnly: (
+    id: number,
+    profileImage: File | null,
+    name: string,
+    isToggle: boolean
+  ) =>
     set((state) => ({
-      profiles: [...state.profiles, { id, profileImage, name }],
+      profiles: [...state.profiles, { id, profileImage, name, isToggle }],
     })),
 
   updateFormsProfile: (id: number, profile: Profile) =>
@@ -58,15 +69,21 @@ export const useChatStore = create<ChatState>((set) => ({
   updateProfileOnly: (
     profileId: number,
     profileImage: File | null,
-    name: string
+    name: string,
+    isToggle: boolean
   ) =>
     set((state) => ({
       profiles: state.profiles.map((profile) =>
-        profile.id === profileId ? { ...profile, profileImage, name } : profile
+        profile.id === profileId
+          ? { ...profile, profileImage, name, isToggle }
+          : profile
       ),
       userForms: state.userForms.map((userform) =>
         userform.profile.id === profileId
-          ? { ...userform, profile: { id: profileId, profileImage, name } }
+          ? {
+              ...userform,
+              profile: { id: profileId, profileImage, name, isToggle },
+            }
           : userform
       ),
     })),
@@ -83,10 +100,15 @@ export const useChatStore = create<ChatState>((set) => ({
       userForms: state.userForms.filter((userform) => userform.id !== id),
     })),
 
-  setIsToggle: (id: number, isToggle: boolean) =>
+  setIsToggle: (profileId: number, isToggle: boolean) =>
     set((state) => ({
+      profiles: state.profiles.map((profile) =>
+        profile.id === profileId ? { ...profile, isToggle } : profile
+      ),
       userForms: state.userForms.map((userform) =>
-        userform.id === id ? { ...userform, isToggle } : userform
+        userform.profile.id === profileId
+          ? { ...userform, profile: { ...userform.profile, isToggle } }
+          : userform
       ),
     })),
 }));
