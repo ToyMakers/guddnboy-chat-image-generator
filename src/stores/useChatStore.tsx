@@ -101,14 +101,40 @@ export const useChatStore = create<ChatState>((set) => ({
     })),
 
   setIsToggle: (profileId: number, isToggle: boolean) =>
-    set((state) => ({
-      profiles: state.profiles.map((profile) =>
-        profile.id === profileId ? { ...profile, isToggle } : profile
-      ),
-      userForms: state.userForms.map((userform) =>
-        userform.profile.id === profileId
-          ? { ...userform, profile: { ...userform.profile, isToggle } }
-          : userform
-      ),
-    })),
+    set((state) => {
+      if (isToggle) {
+        return {
+          profiles: state.profiles.map((profile) =>
+            profile.id === profileId
+              ? { ...profile, isToggle: true }
+              : { ...profile, isToggle: false }
+          ),
+          userForms: state.userForms.map((userform) =>
+            userform.profile.id === profileId
+              ? {
+                  ...userform,
+                  profile: { ...userform.profile, isToggle: true },
+                }
+              : {
+                  ...userform,
+                  profile: { ...userform.profile, isToggle: false },
+                }
+          ),
+        };
+      } else {
+        return {
+          profiles: state.profiles.map((profile) =>
+            profile.id === profileId ? { ...profile, isToggle: false } : profile
+          ),
+          userForms: state.userForms.map((userform) =>
+            userform.profile.id === profileId
+              ? {
+                  ...userform,
+                  profile: { ...userform.profile, isToggle: false },
+                }
+              : userform
+          ),
+        };
+      }
+    }),
 }));
