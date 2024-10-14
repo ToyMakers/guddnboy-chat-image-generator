@@ -46,7 +46,10 @@ const UserForm = ({
   };
 
   const handleToggle = () => {
-    setIsToggle(userForms[userIndex].id, !userForms[userIndex].isToggle);
+    setIsToggle(
+      userForms[userIndex].profile.id,
+      !userForms[userIndex].profile.isToggle
+    );
   };
 
   const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,11 +75,11 @@ const UserForm = ({
         <button
           onClick={handleToggle}
           className={`w-12 h-10 rounded-md transition ${
-            userForms[userIndex].isToggle
+            userForms[userIndex].profile.isToggle
               ? "bg-mychatbg text-gray-500 font-bold text-sm"
               : "bg-chatbg text-white font-bold text-sm"
           }`}>
-          {userForms[userIndex].isToggle ? "본인" : "상대방"}
+          {userForms[userIndex].profile.isToggle ? "본인" : "상대방"}
         </button>
       </div>
       <div className="flex w-auto hover:border border-solid rounded-md border-slate-300">
@@ -86,55 +89,61 @@ const UserForm = ({
               <button
                 onClick={handleDropdownToggle}
                 className="w-32 h-12 text-center rounded-md outline-none appearance-none hover:cursor-pointer">
-                {userForms[userIndex].profile.name}
+                {userForms[userIndex].profile.isToggle
+                  ? "본인"
+                  : userForms[userIndex].profile.name}
               </button>
               {isDropdownOpen && (
                 <div className="absolute left-0 right-0 mt-1 bg-white border border-solid border-slate-300 rounded-md shadow-md z-10">
-                  {profiles.map((profile, index) => (
-                    <div key={index} className="flex">
-                      <button
-                        onClick={() => {
-                          updateFormsProfile(userIndex, {
-                            id: profile.id,
-                            profileImage: profile.profileImage,
-                            name: profile.name,
-                          });
-                          setIsDropdownOpen(false);
-                        }}
-                        className="flex items-center align-middle h-12  text-left px-2 py-1 hover:bg-gray-200 rounded-md transition">
-                        <div className="flex items-center align-middle file:size-9">
+                  {profiles
+                    .filter((profile) => !profile.isToggle)
+                    .map((profile, filteredIndex) => (
+                      <div key={`profile${filteredIndex}`} className="flex">
+                        <button
+                          onClick={() => {
+                            updateFormsProfile(userIndex, {
+                              id: profile.id,
+                              profileImage: profile.profileImage,
+                              name: profile.name,
+                              isToggle: profile.isToggle,
+                            });
+                            setIsDropdownOpen(false);
+                          }}
+                          className="flex items-center align-middle h-12 text-left px-2 py-1 hover:bg-gray-200 rounded-md transition">
+                          <div className="flex items-center align-middle file:size-9">
+                            <Image
+                              width={30}
+                              height={30}
+                              src={
+                                profile.profileImage
+                                  ? URL.createObjectURL(profile.profileImage)
+                                  : "/images/default.png"
+                              }
+                              alt="프로필"
+                              className="rounded-full mr-1"
+                            />
+                          </div>
+                          <div className="text-sm ml-1 w-14">
+                            {profile.name}
+                          </div>
+                        </button>
+                        <button
+                          onClick={() => {
+                            setEditProfileIndex(filteredIndex);
+                            setIsEditOpen(true);
+                            setIsDropdownOpen(false);
+                          }}
+                          className="hover:bg-gray-200 rounded-md transition">
                           <Image
-                            width={30}
-                            height={30}
-                            src={
-                              profiles[index].profileImage
-                                ? URL.createObjectURL(
-                                    profiles[index].profileImage
-                                  )
-                                : "/images/default.png"
-                            }
-                            alt="프로필"
-                            className="rounded-full mr-1"
+                            width={20}
+                            height={20}
+                            src="/images/update.png"
+                            alt="수정"
                           />
-                        </div>
-                        <div className="text-sm ml-1 w-14">{profile.name}</div>
-                      </button>
-                      <button
-                        onClick={() => {
-                          setEditProfileIndex(index);
-                          setIsEditOpen(true);
-                          setIsDropdownOpen(false);
-                        }}
-                        className="hover:bg-gray-200 rounded-md transition">
-                        <Image
-                          width={20}
-                          height={20}
-                          src="/images/update.png"
-                          alt="수정"
-                        />
-                      </button>
-                    </div>
-                  ))}
+                        </button>
+                      </div>
+                    ))}
+
                   <button
                     onClick={handleModalOpen}
                     className="z-0 flex justify-between w-full h-12 text-left items-center px-2 py-1 hover:bg-gray-200 rounded-md">
