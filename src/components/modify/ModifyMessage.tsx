@@ -110,11 +110,11 @@ const ModifyMessage = () => {
         <div className="flex items-center justify-between w-full h-10 border border-solid border-gray-400 rounded-md">
           <input
             className="w-11/12 h-full pl-2 bg-inherit outline-none"
-            type="number"
-            onChange={(e) => setWidth(Number(e.target.value))}
+            type="text"
+            onChange={(e) => setWidth(e.target.value)}
             placeholder={width_Message.toString()}
           />
-          <div className="w-12 text-center text-timebg">1</div>
+          <div className="w-12 text-center text-timebg">T</div>
         </div>
       </section>
     </div>

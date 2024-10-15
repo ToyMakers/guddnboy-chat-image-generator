@@ -7,7 +7,7 @@ interface MessageStyle {
   fontSize_Message: number;
   fontPadding_Message: number;
   fontColor_Message: string;
-  width_Message: number;
+  width_Message: string;
   backgroundColor_MyMessage: string;
 
   setFontWeight: (fontweight_Message: number) => void;
@@ -19,7 +19,7 @@ interface MessageStyle {
     backgroundcolor_Message: string,
     backgroundColor_MyMessage: string
   ) => void;
-  setWidth: (width_Message: number) => void;
+  setWidth: (width_Message: string) => void;
 }
 
 export const useMessageStyleStore = create<MessageStyle>((set) => ({
@@ -29,7 +29,7 @@ export const useMessageStyleStore = create<MessageStyle>((set) => ({
   fontSize_Message: 12,
   fontPadding_Message: 10,
   fontColor_Message: "#000000",
-  width_Message: 100,
+  width_Message: "fit-content",
   backgroundColor_MyMessage: "#F7E600",
 
   setFontWeight: (fontweight) => set({ fontWeight_Message: fontweight }),
