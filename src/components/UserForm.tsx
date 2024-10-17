@@ -101,10 +101,10 @@ const UserForm = ({
                   {profiles
                     .filter((profile) => !profile.isToggle)
                     .map((profile, filteredIndex) => (
-                      <div key={`profile${filteredIndex}`} className="flex">
+                      <div key={filteredIndex} className="flex">
                         <button
                           onClick={() => {
-                            updateFormsProfile(userIndex, {
+                            updateFormsProfile(userForms[userIndex].id, {
                               id: profile.id,
                               profileImage: profile.profileImage,
                               name: profile.name,

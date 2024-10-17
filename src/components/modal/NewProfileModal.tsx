@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { useChatStore } from "../../stores/useChatStore";
 
@@ -34,10 +34,10 @@ const NewProfileModal = ({
   const [name, setName] = useState("");
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
-  const [randomProfile, setRandomProfile] = useState({
-    name: "",
-    imageUrl: "",
-  });
+  // const [randomProfile, setRandomProfile] = useState({
+  //   name: "",
+  //   imageUrl: "",
+  // });
 
   const profiles = useChatStore((state) => state.profiles);
   const addProfileOnly = useChatStore((state) => state.addProfileOnly);
@@ -62,8 +62,6 @@ const NewProfileModal = ({
       return;
     }
     addProfileOnly(profiles.length, profileImage ?? null, name, false);
-    console.log("handleAddProfile 실행 : ");
-    console.log("profiles : ", profiles);
     handleClose();
   };
 
@@ -76,20 +74,17 @@ const NewProfileModal = ({
     setName(randomNewProfile.name);
     setPreviewImage(randomNewProfile.imageUrl);
     setProfileImage(file);
-
-    console.log("handleRandomGenerate 실행 : ", randomNewProfile);
-    console.log("profiles : ", profiles);
   };
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const randomNewProfile = await getRandomProfile();
-      setRandomProfile(randomNewProfile);
-      console.log("randomProfile : ", randomProfile);
-    };
+  // useEffect(() => {
+  //   const fetchProfile = async () => {
+  //     const randomNewProfile = await getRandomProfile();
+  //     setRandomProfile(randomNewProfile);
 
-    fetchProfile();
-  }, []);
+  //   };
+
+  //   fetchProfile();
+  // }, []);
 
   return (
     <div className="flex fixed inset-0 z-50 bg-gray-700 bg-opacity-70 items-center justify-center">
