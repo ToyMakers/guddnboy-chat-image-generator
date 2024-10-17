@@ -15,8 +15,6 @@ const UserForm = ({
   const [isOpen, setIsOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editProfileIndex, setEditProfileIndex] = useState<number | null>(null);
-  const [message, setMessage] = useState("");
-
   const userForms = useChatStore((state) => state.userForms);
   const profiles = useChatStore((state) => state.profiles);
   const updateMessage = useChatStore((state) => state.updateMessage);
@@ -54,7 +52,6 @@ const UserForm = ({
 
   const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newMessage = e.target.value;
-    setMessage(newMessage);
 
     updateMessage(userForms[userIndex].id, {
       message: newMessage,
@@ -192,7 +189,7 @@ const UserForm = ({
           placeholder={
             userForms[userIndex].message.message || "메세지를 입력하세요."
           }
-          value={message}
+          value={userForms[userIndex].message.message}
           onChange={handleMessageChange}
           className="px-2 w-64 h-12 transition rounded-md bg-slate-100 outline-none hover:border border-solid border-slate-300"
         />
@@ -200,6 +197,7 @@ const UserForm = ({
       <div className="w-auto">
         <input
           type="time"
+          value={userForms[userIndex].message.time}
           onChange={handleTimeChange}
           className="w-32 h-12 transition rounded-md bg-slate-100 outline-none hover:border border-solid border-slate-300"
         />
