@@ -88,7 +88,7 @@ const UserMessagePreview = ({ userIndex }: { userIndex: number }) => {
       {!userForms[userIndex].profile.isToggle ? (
         <>
           <div
-            className="flex box-border w-full h-fit cursor-pointer border border-solid border-transparent hover:border-slate-500"
+            className="box-border h-fit cursor-pointer border border-solid border-transparent hover:border-slate-500"
             onClick={handleModifyProfile}
             style={{
               borderRadius: borderRadius,
@@ -132,7 +132,7 @@ const UserMessagePreview = ({ userIndex }: { userIndex: number }) => {
               </div>
             </div>
             <div
-              className="flex items-center w-auto px-2 m-1 bg-yourchatbg text-sm rounded-md box-border cursor-pointer border border-solid border-transparent hover:border-slate-500"
+              className="flex items-center w-full px-2 m-1 bg-yourchatbg text-sm rounded-md box-border cursor-pointer border border-solid border-transparent hover:border-slate-500"
               onClick={handleModifyMessage}
               style={{
                 fontSize: fontSize_Message,
@@ -144,7 +144,7 @@ const UserMessagePreview = ({ userIndex }: { userIndex: number }) => {
                 width: width_Message,
                 wordWrap: "break-word",
                 height: "auto",
-                maxWidth: "240px",
+                maxWidth: "200px",
                 minHeight: "40px",
               }}>
               {userForms[userIndex].message.message}
@@ -164,14 +164,16 @@ const UserMessagePreview = ({ userIndex }: { userIndex: number }) => {
         </>
       ) : (
         <>
-          <div
-            className="flex w-full h-fit items-end rounded-md box-border cursor-pointer border border-solid border-transparent hover:border-slate-500"
-            onClick={handleModifyTime}
-            style={{ fontSize: fontSize_time, color: textColor_time }}>
-            {userForms[userIndex].message.time}
+          <div className="flex flex-col justify-end">
+            <div
+              className="w-full h-fit items-end rounded-md box-border cursor-pointer border border-solid border-transparent hover:border-slate-500"
+              onClick={handleModifyTime}
+              style={{ fontSize: fontSize_time, color: textColor_time }}>
+              {userForms[userIndex].message.time}
+            </div>
           </div>
           <div
-            className="flex items-center h-10 px-2 m-1 text-sm rounded-md box-border cursor-pointer border border-solid border-transparent hover:border-slate-500"
+            className="flex items-center w-full h-10 px-2 m-1 text-sm rounded-md box-border cursor-pointer border border-solid border-transparent hover:border-slate-500"
             onClick={handleModifyMessage}
             style={{
               fontSize: fontSize_Message,
@@ -181,7 +183,9 @@ const UserMessagePreview = ({ userIndex }: { userIndex: number }) => {
               borderRadius: borderRounded_Message,
               backgroundColor: backgroundColor_MyMessage,
               width: width_Message,
+              wordWrap: "break-word",
               height: "auto",
+              maxWidth: "200px",
               minHeight: "40px",
             }}>
             {userForms[userIndex].message.message}
