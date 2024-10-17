@@ -18,7 +18,7 @@ export default function RootPage() {
   const captureContentPreview = async () => {
     if (contentPreviewRef.current) {
       setLoading(true);
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       try {
         const canvas = await html2canvas(contentPreviewRef.current);
         const imgData = canvas.toDataURL("image/png");
