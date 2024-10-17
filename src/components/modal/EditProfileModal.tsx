@@ -74,7 +74,6 @@ const EditProfileModal = ({
     }
 
     updateProfileOnly(editProfileIndex, profileImage, name, false);
-    console.log(`profiles : ${profiles}`);
     handleClose();
   };
 
