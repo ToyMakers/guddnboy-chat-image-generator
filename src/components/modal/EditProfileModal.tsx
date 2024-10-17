@@ -3,6 +3,27 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useChatStore } from "../../stores/useChatStore";
 
+const getRandomProfile = async () => {
+  const randomNames = [
+    "영희",
+    "훈이",
+    "맹구",
+    "희동",
+    "짱구",
+    "유리",
+    "둘리",
+    "짱아",
+    "또치",
+  ];
+  const randomSeed = Math.random().toString(36).substring(7);
+  const randomImageUrl = `https://api.dicebear.com/9.x/croodles-neutral/png?seed=${randomSeed}`;
+
+  return {
+    name: randomNames[Math.floor(Math.random() * randomNames.length)],
+    imageUrl: randomImageUrl,
+  };
+};
+
 const EditProfileModal = ({
   title,
   editProfileIndex,
@@ -31,6 +52,17 @@ const EditProfileModal = ({
   const updateProfileOnly = useChatStore((state) => state.updateProfileOnly);
   const deleteProfile = useChatStore((state) => state.deleteProfile);
 
+  const handleRandomGenerate = async () => {
+    const randomNewProfile = await getRandomProfile();
+    const response = await fetch(randomNewProfile.imageUrl);
+    const blob = await response.blob();
+    const file = new File([blob], "profile.svg", { type: blob.type });
+
+    setName(randomNewProfile.name);
+    setPreviewImage(randomNewProfile.imageUrl);
+    setProfileImage(file);
+  };
+
   const handleSave = () => {
     if (!name) {
       alert("이름을 입력해주세요.");
@@ -42,8 +74,7 @@ const EditProfileModal = ({
     }
 
     updateProfileOnly(editProfileIndex, profileImage, name, false);
-
-    console.log("프로필 수정 저장 실행");
+    console.log(`profiles : ${profiles}`);
     handleClose();
   };
 
@@ -102,6 +133,11 @@ const EditProfileModal = ({
         </section>
 
         <div className="mt-4">
+          <button
+            className="px-4 py-2 bg-chatbg text-white rounded-md transition hover:bg-sky-700 mr-4"
+            onClick={handleRandomGenerate}>
+            랜덤 생성
+          </button>
           <button
             onClick={handleSave}
             className="px-4 py-2 mr-4 bg-chatbg text-white rounded-md transition hover:bg-sky-700">
