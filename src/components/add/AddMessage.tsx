@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment, useRef } from "react";
+import React, { Fragment } from "react";
 import UserForm from "../UserForm";
 import { useChatStore } from "../../stores/useChatStore";
 
@@ -10,7 +10,6 @@ const AddMessage = () => {
 
   const addUserForm = useChatStore((state) => state.addUserForm);
   const removeUserForm = useChatStore((state) => state.removeUserForm);
-  const idCounter = useRef(0);
 
   const addNewUserForm = () => {
     const defaultProfile = profiles[0];
@@ -21,14 +20,13 @@ const AddMessage = () => {
     };
 
     const newUserForm = {
-      id: idCounter.current,
+      id: Date.now(),
       profile: defaultProfile,
       message: defaultMessage,
       isToggle: false,
     };
 
     addUserForm(newUserForm);
-    idCounter.current += 1;
   };
 
   const deleteUserForm = (id: number) => {
@@ -50,7 +48,7 @@ const AddMessage = () => {
           <div className="w-full">
             {userForms.map((userForm, index) => (
               <UserForm
-                key={userForm.id}
+                key={`userForm${userForm.id}`}
                 userIndex={index}
                 onRemove={() => deleteUserForm(userForm.id)}
               />
