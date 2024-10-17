@@ -87,38 +87,41 @@ const UserMessagePreview = ({ userIndex }: { userIndex: number }) => {
     <div className="flex text-sm">
       {!userForms[userIndex].profile.isToggle ? (
         <>
-          <div className="flex" onClick={handleModifyProfile}>
-            <div className="flex box-content h-fit hover:cursor-pointer hover:border border-solid border-slate-500">
-              <Image
-                style={{
-                  backgroundColor: backgroundColor,
-                  borderWidth: borderWidth,
-                  borderRadius: borderRadius,
-                  padding: padding,
-                  borderColor: borderColor,
-                  borderStyle: borderStyle,
-                  width: `${width}px`,
-                  minWidth: `${width}px`,
-                  height: `${height}px`,
-                  boxSizing: "content-box",
-                }}
-                width={width}
-                height={height}
-                src={
-                  userForms[userIndex].profile.profileImage
-                    ? URL.createObjectURL(
-                        userForms[userIndex].profile.profileImage
-                      )
-                    : "/images/default.png"
-                }
-                alt="프로필"
-              />
-            </div>
+          <div
+            className="flex box-border w-full h-fit cursor-pointer border border-solid border-transparent hover:border-slate-500"
+            onClick={handleModifyProfile}
+            style={{
+              borderRadius: borderRadius,
+            }}>
+            <Image
+              style={{
+                backgroundColor: backgroundColor,
+                borderWidth: borderWidth,
+                borderRadius: borderRadius,
+                padding: padding,
+                borderColor: borderColor,
+                borderStyle: borderStyle,
+                width: `${width}px`,
+                minWidth: `${width}px`,
+                height: `${height}px`,
+              }}
+              width={width}
+              height={height}
+              src={
+                userForms[userIndex].profile.profileImage
+                  ? URL.createObjectURL(
+                      userForms[userIndex].profile.profileImage
+                    )
+                  : "/images/default.png"
+              }
+              alt="프로필"
+            />
           </div>
+
           <div>
             <div>
               <div
-                className="text-sm w-14 h-6 hover:cursor-pointer hover:border border-solid border-slate-500 rounded-md"
+                className="text-sm w-14 h-6 box-border rounded-md cursor-pointer border border-solid border-transparent hover:border-slate-500"
                 onClick={handleModifyName}
                 style={{
                   fontSize: fontsize_name,
@@ -129,7 +132,7 @@ const UserMessagePreview = ({ userIndex }: { userIndex: number }) => {
               </div>
             </div>
             <div
-              className="flex items-center w-auto px-2 m-1 bg-yourchatbg text-sm rounded-md hover:cursor-pointer hover:border border-solid border-slate-500"
+              className="flex items-center w-auto px-2 m-1 bg-yourchatbg text-sm rounded-md box-border cursor-pointer border border-solid border-transparent hover:border-slate-500"
               onClick={handleModifyMessage}
               style={{
                 fontSize: fontSize_Message,
@@ -149,7 +152,7 @@ const UserMessagePreview = ({ userIndex }: { userIndex: number }) => {
           </div>
           <div className="flex flex-col justify-end h-full">
             <div
-              className="flex flex-col h-6 items-end hover:cursor-pointer hover:border border-solid border-slate-500"
+              className="flex flex-col rounded-md w-full h-6 items-end box-border cursor-pointer border border-solid border-transparent hover:border-slate-500"
               onClick={handleModifyTime}
               style={{
                 fontSize: fontSize_time,
@@ -162,13 +165,13 @@ const UserMessagePreview = ({ userIndex }: { userIndex: number }) => {
       ) : (
         <>
           <div
-            className="flex box-border w-full items-end hover:cursor-pointer hover:border border-solid border-slate-500"
+            className="flex w-full h-fit items-end rounded-md box-border cursor-pointer border border-solid border-transparent hover:border-slate-500"
             onClick={handleModifyTime}
             style={{ fontSize: fontSize_time, color: textColor_time }}>
             {userForms[userIndex].message.time}
           </div>
           <div
-            className="flex box-border items-center h-10 px-2 m-1 text-sm rounded-md hover:cursor-pointer hover:border border-solid border-slate-500"
+            className="flex items-center h-10 px-2 m-1 text-sm rounded-md box-border cursor-pointer border border-solid border-transparent hover:border-slate-500"
             onClick={handleModifyMessage}
             style={{
               fontSize: fontSize_Message,
