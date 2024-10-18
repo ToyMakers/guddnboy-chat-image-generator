@@ -35,7 +35,7 @@ const ModifyName = () => {
             id="fontWeight"
             type="number"
             onChange={handleFontWeightChange}
-            placeholder={fontweight_name}
+            value={fontweight_name}
           />
           <div className="w-12 text-center text-timebg">1</div>
         </div>
@@ -49,7 +49,7 @@ const ModifyName = () => {
             id="fontSize"
             type="number"
             onChange={handleFontSizeChange}
-            placeholder={fontsize_name}
+            value={parseInt(fontsize_name)}
           />
           <div className="w-12 text-center text-timebg">1</div>
         </div>
@@ -63,7 +63,7 @@ const ModifyName = () => {
             id="color_name"
             type="color"
             onChange={handleColorChange}
-            placeholder={color_name}
+            value={color_name}
           />
           <div className="w-12 text-center text-timebg">T</div>
         </div>

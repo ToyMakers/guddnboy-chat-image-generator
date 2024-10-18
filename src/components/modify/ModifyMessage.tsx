@@ -30,7 +30,7 @@ const ModifyMessage = () => {
             className="w-11/12 h-full pl-2 bg-inherit outline-none"
             type="number"
             onChange={(e) => setFontSize(Number(e.target.value))}
-            placeholder={fontSize_Message.toString()}
+            value={fontSize_Message.toString()}
           />
           <div className="w-12 text-center text-timebg">1</div>
         </div>
@@ -43,7 +43,7 @@ const ModifyMessage = () => {
             className="w-11/12 h-full pl-2 bg-inherit outline-none"
             type="number"
             onChange={(e) => setFontWeight(Number(e.target.value))}
-            placeholder={fontWeight_Message.toString()}
+            value={fontWeight_Message.toString()}
           />
           <div className="w-12 text-center text-timebg">1</div>
         </div>
@@ -55,7 +55,7 @@ const ModifyMessage = () => {
             className="w-11/12 h-full pl-2 bg-inherit outline-none"
             type="number"
             onChange={(e) => setFontPadding(Number(e.target.value))}
-            placeholder={fontPadding_Message.toString()}
+            value={fontPadding_Message.toString()}
           />
           <div className="w-12 text-center text-timebg">1</div>
         </div>
@@ -68,7 +68,7 @@ const ModifyMessage = () => {
             className="w-28 pl-2 bg-inherit"
             type="color"
             onChange={(e) => setFontColor(e.target.value)}
-            placeholder={fontColor_Message}
+            value={fontColor_Message}
           />
           <div className="w-12 text-center text-timebg">T</div>
         </div>
@@ -81,7 +81,7 @@ const ModifyMessage = () => {
             className="w-11/12 h-full pl-2 bg-inherit outline-none"
             type="number"
             onChange={(e) => setBorderRounded(Number(e.target.value))}
-            placeholder={borderRounded_Message.toString()}
+            value={borderRounded_Message.toString()}
           />
           <div className="w-12 text-center text-timebg">1</div>
         </div>
@@ -112,7 +112,7 @@ const ModifyMessage = () => {
             className="w-11/12 h-full pl-2 bg-inherit outline-none"
             type="text"
             onChange={(e) => setWidth(e.target.value)}
-            placeholder={width_Message.toString()}
+            value={width_Message.toString()}
           />
           <div className="w-12 text-center text-timebg">T</div>
         </div>
