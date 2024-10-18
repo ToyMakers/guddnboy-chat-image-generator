@@ -142,7 +142,7 @@ const UserMessagePreview = ({ userIndex }: { userIndex: number }) => {
                 borderRadius: borderRounded_Message,
                 backgroundColor: backgroundcolor_Message,
                 width: width_Message,
-                wordWrap: "break-word",
+                wordBreak: "break-all",
                 height: "auto",
                 maxWidth: "200px",
                 minHeight: "40px",
