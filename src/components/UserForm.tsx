@@ -173,7 +173,7 @@ const UserForm = ({
                   <EditProfileModal
                     title={"프로필 수정하기"}
                     editProfileIndex={editProfileIndex}
-                    profile={userForms[editProfileIndex].profile}
+                    profile={profiles[editProfileIndex]}
                     handleClose={() => setIsEditOpen(false)}
                   />
                 </div>
