@@ -7,7 +7,6 @@
 https://guddnboy-chat-image-generator.vercel.app/
 
 # 기능 요구사항
-
 ## 참여자 관리
 
 - **추가**
