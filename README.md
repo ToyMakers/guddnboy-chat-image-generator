@@ -4,7 +4,7 @@
 
 ## 배포 링크
 
-https://chat-image-generator.vercel.app/
+https://guddnboy-chat-image-generator.vercel.app/
 
 # 기능 요구사항
 
